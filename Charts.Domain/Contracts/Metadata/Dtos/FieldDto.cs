@@ -1,0 +1,44 @@
+﻿using Charts.Api.Domain.Contracts.Types;
+using Charts.Api.Infrastructure.Validations;
+using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
+
+namespace Charts.Api.Application.Contracts.Metadata.Dtos
+{
+    public class FieldDto
+    {
+        public string Name { get; set; } = string.Empty;
+
+
+        [RequiredWithName] // ← автоматически подставит Name из этого же объекта
+        [MinLength(1, ErrorMessage = "Тип поля не может быть пустым")]
+        public string Type {  get; set; }
+
+        [JsonConverter(typeof(JsonStringEnumConverter))]
+        public SqlParamType? SqlParamType = null; // нормализованный тип для параметров/фильтров, если можем определить
+        public bool? IsNumeric { get; set; } = null;
+        public bool? IsTime { get; set; } = null;
+
+
+
+        public FieldDto()
+        {
+
+        }
+
+        public FieldDto(string name, string type)
+        {
+            Name = name;
+            Type = type;
+        }
+
+        public FieldDto(string name, string type, SqlParamType? sqlParamType, bool? isNumeric, bool? isTime)
+        {
+            Name = name;
+            Type = type;
+            IsNumeric = isNumeric;
+            IsTime = isTime;
+            SqlParamType = sqlParamType;
+        }
+    }
+}
