@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Charts.Api.Domain.Mirax.CopyModels
+namespace Mirax.AvisAcceptanceApp.Share.CopyModels
 {
     public abstract class DeviceEntity  
     {

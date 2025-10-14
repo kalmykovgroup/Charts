@@ -1,6 +1,6 @@
 ﻿using Charts.Api.Application.Contracts;
 using Charts.Api.Domain.Mirax;
-using Charts.Api.Domain.Mirax.CopyModels;
+using Mirax.AvisAcceptanceApp.Share.CopyModels;
 using MediatR;
 
 namespace Charts.Api.Application.QueryAndCommands.Mirax

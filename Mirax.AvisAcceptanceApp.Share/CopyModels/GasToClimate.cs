@@ -1,7 +1,7 @@
 ﻿using Mirax.AvisAcceptanceApp.Share.Types;
 using System.ComponentModel.DataAnnotations;
 
-namespace Charts.Api.Domain.Mirax.CopyModels
+namespace Mirax.AvisAcceptanceApp.Share.CopyModels
 {
     public class GasToClimate 
     {

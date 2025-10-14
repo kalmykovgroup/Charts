@@ -1,7 +1,7 @@
 ﻿using Mirax.AvisAcceptanceApp.Models.Entity;
 using System.ComponentModel.DataAnnotations;
 
-namespace Charts.Api.Domain.Mirax.CopyModels
+namespace Mirax.AvisAcceptanceApp.Share.CopyModels
 {
     public class ClimateTestSubOperationsTimestamp
     {

@@ -225,7 +225,7 @@ namespace Charts.Api
                 });
             });
 
-            /* app.Use(async (ctx, next) =>
+          app.Use(async (ctx, next) =>
              {
                  var ready = ctx.RequestServices.GetRequiredService<IAppReadiness>();
                  var path = ctx.Request.Path;
@@ -242,7 +242,7 @@ namespace Charts.Api
                  }
 
                  await next();
-             });*/
+             });
 
 
             // ---------- Dev Swagger ----------

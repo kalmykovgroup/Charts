@@ -12,4 +12,8 @@ public sealed class MetaDbOptions
     public bool FailOnConnectionError { get; set; } = true;
     public int RetryAttempts { get; set; } = 5;
     public int RetryDelaySeconds { get; set; } = 2;
+
+    // ДОБАВИТЬ:
+    public bool RunSeeders { get; set; } = true;
+    public bool FailOnSeederError { get; set; } = false;
 }

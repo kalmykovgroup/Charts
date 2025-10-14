@@ -4,7 +4,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Drawing;
 
-namespace Charts.Api.Domain.Mirax.CopyModels
+namespace Mirax.AvisAcceptanceApp.Share.CopyModels
 {
     public partial class PortableDevice : DeviceEntity 
     {

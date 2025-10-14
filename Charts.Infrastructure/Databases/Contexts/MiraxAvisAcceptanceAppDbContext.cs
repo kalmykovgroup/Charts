@@ -1,4 +1,4 @@
-﻿using Charts.Api.Domain.Mirax.CopyModels;
+﻿using Mirax.AvisAcceptanceApp.Share.CopyModels;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Mirax.AvisAcceptanceApp.Models.Entity;

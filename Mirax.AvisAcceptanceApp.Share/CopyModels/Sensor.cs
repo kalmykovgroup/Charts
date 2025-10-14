@@ -1,7 +1,7 @@
 ﻿using Mirax.AvisAcceptanceApp.Models.DTO.ClimateTest;
 using Mirax.AvisAcceptanceApp.Models.Entity.ModBusDevice.PortableDeviceModel;
 
-namespace Charts.Api.Domain.Mirax.CopyModels
+namespace Mirax.AvisAcceptanceApp.Share.CopyModels
 {
     public partial class Sensor : DeviceEntity 
     {
