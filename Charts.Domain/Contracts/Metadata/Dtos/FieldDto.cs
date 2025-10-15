@@ -9,10 +9,12 @@ namespace Charts.Api.Application.Contracts.Metadata.Dtos
     {
         public string Name { get; set; } = string.Empty;
 
+        public int VisualOrder { get; set; } = 0;
+
 
         [RequiredWithName] // ← автоматически подставит Name из этого же объекта
         [MinLength(1, ErrorMessage = "Тип поля не может быть пустым")]
-        public string Type {  get; set; }
+        public string Type { get; set; } = string.Empty;
 
         [JsonConverter(typeof(JsonStringEnumConverter))]
         public SqlParamType? SqlParamType = null; // нормализованный тип для параметров/фильтров, если можем определить
@@ -30,6 +32,11 @@ namespace Charts.Api.Application.Contracts.Metadata.Dtos
         {
             Name = name;
             Type = type;
+        }
+
+        public FieldDto(string name, string type, int visualOrder): this(name, type) 
+        { 
+            VisualOrder = visualOrder;
         }
 
         public FieldDto(string name, string type, SqlParamType? sqlParamType, bool? isNumeric, bool? isTime)

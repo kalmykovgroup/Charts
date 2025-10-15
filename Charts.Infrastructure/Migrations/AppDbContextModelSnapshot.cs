@@ -103,6 +103,10 @@ namespace Charts.Infrastructure.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("updated_by");
 
+                    b.Property<int>("VisualOrder")
+                        .HasColumnType("integer")
+                        .HasColumnName("visual_order");
+
                     b.Property<string>("Where")
                         .HasColumnType("jsonb")
                         .HasColumnName("where");

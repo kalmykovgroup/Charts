@@ -10,6 +10,7 @@ namespace Charts.Api.Application.Contracts.Template.Requests
         public string Name { get; set; } = string.Empty;
         public string? Description { get; set; }
 
+        public int VisualOrder { get; set; }
         public Guid DatabaseId { get; set; } 
 
         //Это исходный при старте графика

@@ -5,7 +5,6 @@ using Charts.Api.Application.QueryAndCommands.Template;
 using Charts.Api.Middleware;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using System.Text.Json;
 
 namespace Charts.Api.Controllers;
 

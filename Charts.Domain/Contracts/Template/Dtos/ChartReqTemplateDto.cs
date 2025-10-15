@@ -9,6 +9,8 @@ namespace Charts.Api.Application.Contracts.Template.Dtos
         public string Name { get; set; } = string.Empty;
         public string? Description { get; set; }
 
+        public int VisualOrder {  get; set; }
+
         public Guid DatabaseId { get; set; } // где исполнять
         public DatabaseDto Database { get; set; } = null!;
 

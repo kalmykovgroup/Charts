@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Charts.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20251014074022_InitialCreate")]
+    [Migration("20251014092426_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -105,6 +105,10 @@ namespace Charts.Infrastructure.Migrations
                     b.Property<Guid?>("UpdatedBy")
                         .HasColumnType("uuid")
                         .HasColumnName("updated_by");
+
+                    b.Property<int>("VisualOrder")
+                        .HasColumnType("integer")
+                        .HasColumnName("visual_order");
 
                     b.Property<string>("Where")
                         .HasColumnType("jsonb")

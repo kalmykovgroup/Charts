@@ -47,6 +47,7 @@ namespace Charts.Infrastructure.Migrations
                     name = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false),
                     description = table.Column<string>(type: "character varying(1000)", maxLength: 1000, nullable: true),
                     database_id = table.Column<Guid>(type: "uuid", nullable: false),
+                    visual_order = table.Column<int>(type: "integer", nullable: false),
                     original_from_ms = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     original_to_ms = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     entity = table.Column<string>(type: "jsonb", nullable: false),

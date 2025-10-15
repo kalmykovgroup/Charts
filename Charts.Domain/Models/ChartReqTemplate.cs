@@ -12,6 +12,8 @@ namespace Charts.Api.Application.Models
         public Guid DatabaseId { get; set; } // где исполнять
         public Database Database { get; set; } = null!;
 
+        public int VisualOrder { get; set; }
+
         public long? OriginalFromMs { get; init; }
         public long? OriginalToMs { get; init; }
 

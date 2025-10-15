@@ -33,7 +33,7 @@ namespace Charts.Api.Infrastructure.Databases.Seeder
                 Name = "Сенсор",
                 Description = "Получаем данные по сенсору, который мы укажем на фильтр + параметр",
                 DatabaseId = database.Id,
-                 
+                VisualOrder = 0, 
 
                 // Настройки графика
                 Entity = new EntityDto("public.DeviceEntity"), // поменяй на вашу таблицу/представление
@@ -42,7 +42,7 @@ namespace Charts.Api.Infrastructure.Databases.Seeder
                     SqlParamType = SqlParamType.Date
                 },          // колонка времени
                 SelectedFields = new[] { 
-                    new FieldDto("Concentration", "double")
+                    new FieldDto("Concentration", "double", 0)
                     {
                         SqlParamType = SqlParamType.Double
                     } 
@@ -70,7 +70,7 @@ namespace Charts.Api.Infrastructure.Databases.Seeder
                         {
                             Type = "text",
                             SqlParamType = SqlParamType.Text,
-                            
+                            VisualOrder = 0,
                         },
                         DefaultValue: "2507434",
 
@@ -84,6 +84,7 @@ namespace Charts.Api.Infrastructure.Databases.Seeder
                         {
                             Type = "uuid",
                             SqlParamType = SqlParamType.Uuid,
+                            VisualOrder = 1,
 
                         },
                         DefaultValue: "371ff58e-9879-4b3a-8271-a75543e48b7d",
@@ -112,8 +113,9 @@ namespace Charts.Api.Infrastructure.Databases.Seeder
                 Id = SeederIds.DefaultChartReqTemplateSensorId,
                 Name = "Базовые графики avis",
                 Description = "",
-                DatabaseId = database.Id, 
-                 
+                DatabaseId = database.Id,
+
+                VisualOrder = 1,
 
                 // Настройки графика
                 Entity = new EntityDto("public.DeviceEntity"), // поменяй на вашу таблицу/представление
@@ -122,15 +124,15 @@ namespace Charts.Api.Infrastructure.Databases.Seeder
                     SqlParamType = SqlParamType.Date
                 },          // колонка времени
                 SelectedFields = new[] {
-                    new FieldDto("BatteryVoltage", "double"){
+                    new FieldDto("BatteryVoltage", "double", 0){
                          SqlParamType = SqlParamType.Double
                     } ,
 
-                     new FieldDto("BatteryLevel", "double"){
+                     new FieldDto("BatteryLevel", "double", 1){
                          SqlParamType = SqlParamType.Double
                     } ,
 
-                     new FieldDto("Temperature", "double"){
+                     new FieldDto("Temperature", "double", 2){
                          SqlParamType = SqlParamType.Double
                     } ,
                 },

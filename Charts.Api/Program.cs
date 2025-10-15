@@ -53,6 +53,7 @@ namespace Charts.Api
 
 
             var builder = WebApplication.CreateBuilder(args);
+     
 
             builder.Host.UseWindowsService();
 
@@ -259,7 +260,7 @@ namespace Charts.Api
                 ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
             });
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
 
             app.UseRouting();
 

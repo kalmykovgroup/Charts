@@ -1,6 +1,7 @@
 ﻿// ============================================================================
 // MetaDbWarmupWorker.cs
 // ============================================================================
+using Charts.Api.Application.Interfaces;
 using Charts.Api.Domain.Interfaces;
 using Charts.Api.Infrastructure.Databases;
 using Charts.Api.Infrastructure.Databases.Seed;
@@ -143,6 +144,14 @@ public sealed class MetaDbWarmupWorker : BackgroundService
         {
             await RunSeedersAsync(ct);
         }
+
+        // 5. Инициализация реестра баз данных
+        _logger.LogInformation("Step 6/6: Initializing Database Registry...");
+        using var scope = _services.CreateScope();
+        var registry = scope.ServiceProvider.GetRequiredService<IDatabaseRegistry>();
+        await registry.InitializeAsync(ct);
+        _logger.LogInformation("✓ Database Registry initialized with {Count} databases",
+            registry.Snapshot.Count);
     }
 
     /// <summary>
