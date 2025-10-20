@@ -105,6 +105,8 @@ namespace Charts.Api.Infrastructure.Repositories
                     ""Id"",
                     ""Gas"",
                     ""ChannelNumber"",
+                    ""DisplayUnits"",
+                    ""MainUnits"",
                     ""Modification""
                 FROM ""DeviceEntity"" 
                 WHERE ""Discriminator"" = 'Sensor' 

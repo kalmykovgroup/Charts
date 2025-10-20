@@ -13,10 +13,6 @@ FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["Charts.Api/Charts.Api.csproj", "Charts.Api/"]
-COPY ["Charts.Infrastructure/Charts.Infrastructure.csproj", "Charts.Infrastructure/"]
-COPY ["Charts.Application/Charts.Application.csproj", "Charts.Application/"]
-COPY ["Charts.Domain/Charts.Domain.csproj", "Charts.Domain/"]
-COPY ["Mirax.AvisAcceptanceApp.Share/Mirax.AvisAcceptanceApp.Share.csproj", "Mirax.AvisAcceptanceApp.Share/"]
 RUN dotnet restore "./Charts.Api/Charts.Api.csproj"
 COPY . .
 WORKDIR "/src/Charts.Api"

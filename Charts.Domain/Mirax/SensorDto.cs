@@ -8,6 +8,8 @@
         public int ChannelNumber { get; set; }
           
         public string? Modification { get; set; }
+        public string? DisplayUnits { get; set; }
+        public string? MainUnits { get; set; }
 
         public Guid TechnicalRunToStartId { get; set; }
 
