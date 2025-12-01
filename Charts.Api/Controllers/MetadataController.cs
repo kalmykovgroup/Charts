@@ -1,8 +1,7 @@
 ﻿using Charts.Api.Middleware;
 using Charts.Application.QueryAndCommands.Metadata;
 using Charts.Application.QueryAndCommands.Metadata.Databases;
-using Charts.Application.QueryAndCommands.Template;
-using Charts.Domain.Contracts.Template.Requests;
+using Charts.Domain.Contracts.Metadata.Requests;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -20,35 +19,35 @@ public class MetadataController(IMediator mediator) : ControllerBase
         return Ok(result);
     }
 
-
-        // POST /templates/create
     [HttpPost("database/create")]
-    public async Task<IActionResult> Create([FromBody] CreateChartReqTemplateRequest body, CancellationToken ct)
+    public async Task<IActionResult> CreateDatabase([FromBody] CreateDatabaseRequest body, CancellationToken ct)
     {
-         var created = await mediator.Send(new CreateChartReqTemplateCommand(body), ct); 
-        return Ok(created); // фронт ждёт сам DTO
+        var created = await mediator.Send(new CreateDatabaseCommand(body), ct);
+        return Ok(created);
     }
 
-    // PUT /templates/{id}
     [HttpPut("database/update/{id}")]
-    public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] UpdateChartReqTemplateRequest body, CancellationToken ct)
+    public async Task<IActionResult> UpdateDatabase([FromRoute] Guid id, [FromBody] UpdateDatabaseRequest body, CancellationToken ct)
     {
         if (body.Id == Guid.Empty || body.Id != id)
-            return BadRequest(new { message = "Body.id должен совпадать с маршрутом /templates/{id}." }); 
+            return BadRequest(new { message = "Body.id должен совпадать с маршрутом /database/update/{id}." });
 
-        var updated = await mediator.Send(new UpdateChartReqTemplateCommand(id, body), ct);
-         
-        return Ok(updated); // фронт ждёт сам DTO
+        var updated = await mediator.Send(new UpdateDatabaseCommand(id, body), ct);
+        return Ok(updated);
     }
 
-    // DELETE /templates/{id}
     [HttpDelete("database/delete/{id}")]
-    public async Task<IActionResult> Delete([FromRoute] Guid id, CancellationToken ct)
-    { 
+    public async Task<IActionResult> DeleteDatabase([FromRoute] Guid id, CancellationToken ct)
+    {
+        var result = await mediator.Send(new DeleteDatabaseCommand(id), ct);
+        return Ok(result);
+    }
 
-        await mediator.Send(new DeleteChartReqTemplateCommand(id), ct);
-
-        return Ok(new { ok = true }); // фронт ждёт именно { ok: true }
+    [HttpPost("database/test-connection")]
+    public async Task<IActionResult> TestConnection([FromBody] TestConnectionRequest body, CancellationToken ct)
+    {
+        var result = await mediator.Send(new TestConnectionCommand(body.ConnectionString, body.Provider), ct);
+        return Ok(result);
     }
 
     [RequireDbKey]
@@ -66,4 +65,10 @@ public class MetadataController(IMediator mediator) : ControllerBase
         var result = await mediator.Send(new GetEntityFieldsQuery(entity), ct);
         return Ok(result);
     }
+}
+
+public class TestConnectionRequest
+{
+    public string ConnectionString { get; set; } = string.Empty;
+    public string Provider { get; set; } = "PostgreSql";
 }

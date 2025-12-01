@@ -30,9 +30,9 @@ namespace Mirax.AvisAcceptanceApp.Share.CopyModels
         /// </summary>
         public List<SensorEvent>? SensorEvents { get; set; }
 
-        public DateTime DateStarTime { get; set; }
+        public DateTimeOffset DateStarTime { get; set; }
 
-        public DateTime DateEndTime { get; set; }
+        public DateTimeOffset DateEndTime { get; set; }
 
         public TimeSpan DurationOfTheExperiment { get; set; }
 

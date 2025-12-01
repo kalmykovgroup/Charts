@@ -1,4 +1,5 @@
 ﻿using System.Data.Common;
+using System.Text.Encodings.Web;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Charts.Api.Extensions;
@@ -91,7 +92,13 @@ namespace Charts.Api
             var defaultCs = builder.Configuration.GetConnectionString("DefaultConnection")
                             ?? throw new InvalidOperationException("ConnectionStrings:DefaultConnection is missing.");
 
-            var dsb = new NpgsqlDataSourceBuilder(defaultCs);
+            var csbDefault = new NpgsqlConnectionStringBuilder(defaultCs)
+            {
+                Encoding = "UTF8",
+                ClientEncoding = "UTF8"
+            };
+
+            var dsb = new NpgsqlDataSourceBuilder(csbDefault.ConnectionString);
             dsb.UseLoggerFactory(loggerFactory);
             dsb.EnableDynamicJson(); // если используешь jsonb c динамическим JSON
             var defaultDataSource = dsb.Build();
@@ -166,6 +173,7 @@ namespace Charts.Api
             builder.Services.AddControllers().AddJsonOptions(o =>
             {
                 o.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
+                o.JsonSerializerOptions.Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping;
                 o.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
                 o.JsonSerializerOptions.Converters.Add(new DateTimeOffsetUtcJsonConverter());
             });

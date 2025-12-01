@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿/*
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Mirax.AvisAcceptanceApp.Models.Entity;
 using Mirax.AvisAcceptanceApp.Models.Entity.Configuration;
@@ -85,3 +86,4 @@ namespace Charts.Infrastructure.Databases.Contexts
         }
     }
 }
+*/

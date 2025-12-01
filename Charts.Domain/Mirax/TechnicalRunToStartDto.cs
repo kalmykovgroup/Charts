@@ -6,9 +6,9 @@
 
         public string? Name { get; set; }
 
-        public DateTime DateStarTime { get; set; }
+        public DateTimeOffset DateStartTime { get; set; }
 
-        public DateTime DateEndTime { get; set; }
+        public DateTimeOffset DateEndTime { get; set; }
  
     }
 }

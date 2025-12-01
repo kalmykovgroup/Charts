@@ -1,12 +1,14 @@
 services:
   postgres:
-    container_name: charts_api 
+    container_name: charts_api
     image: postgres:latest
     restart: always
     environment:
       POSTGRES_USER_FILE: /run/secrets/db_user
       POSTGRES_PASSWORD_FILE: /run/secrets/db_password
       POSTGRES_DB: charts_api
+      LANG: en_US.UTF-8
+      LC_MESSAGES: en_US.UTF-8
     secrets:
       - db_user
       - db_password

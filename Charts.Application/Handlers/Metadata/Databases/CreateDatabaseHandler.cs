@@ -2,6 +2,7 @@
 using Charts.Application.QueryAndCommands.Metadata.Databases;
 using Charts.Domain.Contracts;
 using Charts.Domain.Contracts.Metadata.Dtos;
+using Charts.Domain.Contracts.Types;
 using Charts.Domain.Interfaces;
 using Charts.Domain.Interfaces.Repositories;
 using Charts.Domain.Models;
@@ -14,6 +15,7 @@ namespace Charts.Application.Handlers.Metadata.Databases
         IDatabaseRepository repo,
         IUnitOfWork uow,
         IMapper mapper,
+        IDatabaseRegistry registry,
         ILogger<CreateDatabaseHandler> logger
     ) : IRequestHandler<CreateDatabaseCommand, ApiResponse<DatabaseDto>>
     {
@@ -23,11 +25,17 @@ namespace Charts.Application.Handlers.Metadata.Databases
             try
             {
                 var entity = mapper.Map<Database>(command.Request);
-                entity.Id = Guid.CreateVersion7(); // генерируем Id (как в твоём примере)
+                entity.Id = Guid.CreateVersion7();
 
                 await repo.AddAsync(entity, ct);
                 await uow.SaveChangesAsync(ct);
                 await tx.CommitAsync(ct);
+
+                // Регистрируем в реестре если база активна
+                if (entity.DatabaseStatus == DatabaseStatus.Active)
+                {
+                    await registry.RegisterAsync(entity.Id, ct);
+                }
 
                 return ApiResponse<DatabaseDto>.Ok(mapper.Map<DatabaseDto>(entity));
             }

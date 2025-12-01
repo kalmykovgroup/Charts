@@ -28,7 +28,7 @@ namespace Charts.Infrastructure.Repositories
             SELECT 
                 ""Id"",
                 ""Name"",
-                ""DateStarTime"",
+                ""DateStartTime"",
                 ""DateEndTime""
             FROM ""TechnicalRunsToStart""
             ORDER BY ""Id"" ASC";
@@ -40,7 +40,7 @@ namespace Charts.Infrastructure.Repositories
             SELECT 
                 t.""Id"",
                 t.""Name"",
-                t.""DateStarTime"",
+                t.""DateStartTime"",
                 t.""DateEndTime""
             FROM ""TechnicalRunsToStart"" t
             WHERE EXISTS (

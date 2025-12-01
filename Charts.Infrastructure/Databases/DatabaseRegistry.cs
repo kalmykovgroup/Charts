@@ -11,7 +11,8 @@ namespace Charts.Infrastructure.Databases;
 public sealed class DatabaseRegistry : IDatabaseRegistry
 {
     private readonly ILogger<DatabaseRegistry> _log;
-    private readonly IServiceProvider _sp;   // создаём scope когда нужно
+    private readonly IServiceProvider _sp;
+    private readonly object _lock = new();
 
     private Dictionary<Guid, RegisteredDatabase> _byId = new();
     private Dictionary<string, Guid> _nameToId = new(StringComparer.OrdinalIgnoreCase);
@@ -28,11 +29,9 @@ public sealed class DatabaseRegistry : IDatabaseRegistry
 
     public async Task ReloadAsync(CancellationToken ct = default)
     {
-        // читаем «каталог баз» из твоей таблицы databases
         using var scope = _sp.CreateScope();
         var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
 
-        // подстрой под свою модель (важно: должен быть провайдер)
         var rows = await db.Databases
             .Where(d => d.DatabaseStatus == DatabaseStatus.Active && !d.IsDeleted)
             .Select(d => new
@@ -41,7 +40,7 @@ public sealed class DatabaseRegistry : IDatabaseRegistry
                 d.Name,
                 d.DatabaseVersion,
                 d.ConnectionString,
-                d.Provider // тип: DbProviderType (int) в БД
+                d.Provider
             })
             .ToListAsync(ct);
 
@@ -50,71 +49,286 @@ public sealed class DatabaseRegistry : IDatabaseRegistry
 
         foreach (var d in rows)
         {
-            switch (d.Provider)
+            var registered = CreateRegisteredDatabase(d.Id, d.Name, d.DatabaseVersion, d.ConnectionString, d.Provider);
+            if (registered != null)
             {
-                case DbProviderType.PostgreSql:
-                    {
-                        // Npgsql DataSource
-                        var csb = new NpgsqlConnectionStringBuilder(d.ConnectionString);
-                        if (string.Equals(csb.Host, "localhost", StringComparison.OrdinalIgnoreCase))
-                            csb.Host = "127.0.0.1";
-
-                        var dsb = new NpgsqlDataSourceBuilder(csb.ConnectionString);
-                        // dsb.EnableDynamicJson(); // если нужно jsonb с динамическим сериализатором
-                        var ds = dsb.Build();
-
-                        map[d.Id] = new RegisteredDatabase
-                        {
-                            Id = d.Id,
-                            Key = d.Name,
-                            DatabaseVersion = d.DatabaseVersion ?? "",
-                            ConnectionString = csb.ConnectionString,
-                            Provider = DbProviderType.PostgreSql,
-                            RawDataSource = ds,
-                            OpenConnectionAsync = async ct2 => await ds.OpenConnectionAsync(ct2)
-                        };
-                        nameIx[d.Name] = d.Id;
-                        break;
-                    }
-
-                case DbProviderType.MySql:
-                    throw new NotSupportedException("Нужно реализовать для MySql");
-
-                case DbProviderType.SqlServer:
-                    throw new NotSupportedException("Нужно реализовать для SqlServer");
-
-                default:
-                    throw new NotSupportedException($"Неизвестный провайдер: {d.Provider}");
+                map[d.Id] = registered;
+                nameIx[d.Name] = d.Id;
             }
         }
 
-        _byId = map;
-        _nameToId = nameIx;
+        lock (_lock)
+        {
+            _byId = map;
+            _nameToId = nameIx;
+        }
 
         _log.LogInformation("Database registry reloaded. Count={Count}", _byId.Count);
     }
 
-    public RegisteredDatabase ResolveById(Guid id) =>
-        _byId.TryGetValue(id, out var db)
-            ? db
-            : throw new KeyNotFoundException($"Database with id '{id}' not found");
+    public async Task RegisterAsync(Guid id, CancellationToken ct = default)
+    {
+        using var scope = _sp.CreateScope();
+        var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+
+        var entity = await db.Databases
+            .Where(d => d.Id == id && d.DatabaseStatus == DatabaseStatus.Active && !d.IsDeleted)
+            .Select(d => new
+            {
+                d.Id,
+                d.Name,
+                d.DatabaseVersion,
+                d.ConnectionString,
+                d.Provider
+            })
+            .FirstOrDefaultAsync(ct);
+
+        if (entity == null)
+        {
+            _log.LogWarning("Cannot register database {Id}: not found or not active", id);
+            return;
+        }
+
+        var registered = CreateRegisteredDatabase(entity.Id, entity.Name, entity.DatabaseVersion, entity.ConnectionString, entity.Provider);
+        if (registered != null)
+        {
+            lock (_lock)
+            {
+                _byId[entity.Id] = registered;
+                _nameToId[entity.Name] = entity.Id;
+            }
+            _log.LogInformation("Database registered: {Name} ({Id})", entity.Name, entity.Id);
+        }
+    }
+
+    public Task UnregisterAsync(Guid id, CancellationToken ct = default)
+    {
+        lock (_lock)
+        {
+            if (_byId.TryGetValue(id, out var db))
+            {
+                _byId.Remove(id);
+                _nameToId.Remove(db.Key);
+                _log.LogInformation("Database unregistered: {Name} ({Id})", db.Key, id);
+            }
+        }
+        return Task.CompletedTask;
+    }
+
+    public RegisteredDatabase ResolveById(Guid id)
+    {
+        lock (_lock)
+        {
+            if (_byId.TryGetValue(id, out var db))
+                return db;
+        }
+        throw new KeyNotFoundException($"Database with id '{id}' not found");
+    }
 
     public RegisteredDatabase ResolveByName(string name)
     {
         if (string.IsNullOrWhiteSpace(name))
             throw new ArgumentNullException(nameof(name));
 
-        return _nameToId.TryGetValue(name, out var id) && _byId.TryGetValue(id, out var db)
-            ? db
-            : throw new KeyNotFoundException($"Database '{name}' not found");
+        lock (_lock)
+        {
+            if (_nameToId.TryGetValue(name, out var id) && _byId.TryGetValue(id, out var db))
+                return db;
+        }
+        throw new KeyNotFoundException($"Database '{name}' not found");
     }
 
-    public bool TryResolveById(Guid id, out RegisteredDatabase db) =>
-        _byId.TryGetValue(id, out db!);
+    public async Task<RegisteredDatabase> ResolveByIdAsync(Guid id, CancellationToken ct = default)
+    {
+        // Сначала проверяем кеш
+        lock (_lock)
+        {
+            if (_byId.TryGetValue(id, out var cached))
+                return cached;
+        }
+
+        // Если нет в кеше — пробуем загрузить из БД
+        _log.LogDebug("Database {Id} not in cache, loading from DB...", id);
+        await RegisterAsync(id, ct);
+
+        lock (_lock)
+        {
+            if (_byId.TryGetValue(id, out var db))
+                return db;
+        }
+
+        throw new KeyNotFoundException($"Database with id '{id}' not found");
+    }
+
+    public async Task<RegisteredDatabase> ResolveByNameAsync(string name, CancellationToken ct = default)
+    {
+        if (string.IsNullOrWhiteSpace(name))
+            throw new ArgumentNullException(nameof(name));
+
+        // Сначала проверяем кеш
+        lock (_lock)
+        {
+            if (_nameToId.TryGetValue(name, out var id) && _byId.TryGetValue(id, out var cached))
+                return cached;
+        }
+
+        // Если нет в кеше — пробуем загрузить из БД
+        _log.LogDebug("Database '{Name}' not in cache, loading from DB...", name);
+
+        using var scope = _sp.CreateScope();
+        var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+
+        var entity = await dbContext.Databases
+            .Where(d => d.Name == name && d.DatabaseStatus == DatabaseStatus.Active && !d.IsDeleted)
+            .Select(d => new { d.Id })
+            .FirstOrDefaultAsync(ct);
+
+        if (entity != null)
+        {
+            await RegisterAsync(entity.Id, ct);
+
+            lock (_lock)
+            {
+                if (_byId.TryGetValue(entity.Id, out var db))
+                    return db;
+            }
+        }
+
+        throw new KeyNotFoundException($"Database '{name}' not found");
+    }
+
+    public bool TryResolveById(Guid id, out RegisteredDatabase db)
+    {
+        lock (_lock)
+        {
+            return _byId.TryGetValue(id, out db!);
+        }
+    }
 
     public bool TryResolveByName(string name, out RegisteredDatabase db)
     {
         db = default!;
-        return _nameToId.TryGetValue(name, out var id) && _byId.TryGetValue(id, out db);
+        lock (_lock)
+        {
+            return _nameToId.TryGetValue(name, out var id) && _byId.TryGetValue(id, out db);
+        }
+    }
+
+    public async Task<ConnectionTestResult> TestConnectionAsync(string connectionString, DbProviderType provider, CancellationToken ct = default)
+    {
+        var sw = System.Diagnostics.Stopwatch.StartNew();
+
+        try
+        {
+            switch (provider)
+            {
+                case DbProviderType.PostgreSql:
+                {
+                    var csb = new NpgsqlConnectionStringBuilder(connectionString);
+                    if (string.Equals(csb.Host, "localhost", StringComparison.OrdinalIgnoreCase))
+                        csb.Host = "127.0.0.1";
+                    csb.Encoding = "UTF8";
+                    csb.ClientEncoding = "UTF8";
+                    csb.Timeout = 10;
+
+                    var dsb = new NpgsqlDataSourceBuilder(csb.ConnectionString);
+                    await using var ds = dsb.Build();
+                    await using var connection = await ds.OpenConnectionAsync(ct);
+
+                    sw.Stop();
+                    _log.LogInformation("Connection test successful. Server: {Version}, Time: {Time}ms", connection.ServerVersion, sw.ElapsedMilliseconds);
+
+                    return new ConnectionTestResult(true, connection.ServerVersion, null, sw.ElapsedMilliseconds);
+                }
+
+                case DbProviderType.MySql:
+                    return new ConnectionTestResult(false, null, "MySql provider not implemented yet", sw.ElapsedMilliseconds);
+
+                case DbProviderType.SqlServer:
+                    return new ConnectionTestResult(false, null, "SqlServer provider not implemented yet", sw.ElapsedMilliseconds);
+
+                default:
+                    return new ConnectionTestResult(false, null, $"Unknown provider: {provider}", sw.ElapsedMilliseconds);
+            }
+        }
+        catch (PostgresException pgEx)
+        {
+            sw.Stop();
+            _log.LogWarning(pgEx, "Connection test failed");
+            // Используем SqlState код вместо сломанного текста
+            var errorMessage = GetPostgresErrorMessage(pgEx.SqlState);
+            return new ConnectionTestResult(false, null, errorMessage, sw.ElapsedMilliseconds);
+        }
+        catch (Exception ex)
+        {
+            sw.Stop();
+            _log.LogWarning(ex, "Connection test failed");
+            return new ConnectionTestResult(false, null, ex.Message, sw.ElapsedMilliseconds);
+        }
+    }
+
+    private static string GetPostgresErrorMessage(string? sqlState)
+    {
+        return sqlState switch
+        {
+            "28P01" => "Authentication failed: invalid password",
+            "28000" => "Authentication failed: invalid authorization",
+            "3D000" => "Database does not exist",
+            "42501" => "Permission denied",
+            "08001" => "Unable to establish connection",
+            "08006" => "Connection failure",
+            "57P03" => "Server is starting up",
+            "53300" => "Too many connections",
+            _ => $"PostgreSQL error: {sqlState}"
+        };
+    }
+
+    private RegisteredDatabase? CreateRegisteredDatabase(Guid id, string name, string? version, string connectionString, DbProviderType provider)
+    {
+        try
+        {
+            switch (provider)
+            {
+                case DbProviderType.PostgreSql:
+                {
+                    var csb = new NpgsqlConnectionStringBuilder(connectionString);
+                    if (string.Equals(csb.Host, "localhost", StringComparison.OrdinalIgnoreCase))
+                        csb.Host = "127.0.0.1";
+                    csb.Encoding = "UTF8";
+                    csb.ClientEncoding = "UTF8";
+
+                    var dsb = new NpgsqlDataSourceBuilder(csb.ConnectionString);
+                    var ds = dsb.Build();
+
+                    return new RegisteredDatabase
+                    {
+                        Id = id,
+                        Key = name,
+                        DatabaseVersion = version ?? "",
+                        ConnectionString = csb.ConnectionString,
+                        Provider = DbProviderType.PostgreSql,
+                        RawDataSource = ds,
+                        OpenConnectionAsync = async ct2 => await ds.OpenConnectionAsync(ct2)
+                    };
+                }
+
+                case DbProviderType.MySql:
+                    _log.LogWarning("MySql provider not implemented for database {Name}", name);
+                    return null;
+
+                case DbProviderType.SqlServer:
+                    _log.LogWarning("SqlServer provider not implemented for database {Name}", name);
+                    return null;
+
+                default:
+                    _log.LogWarning("Unknown provider {Provider} for database {Name}", provider, name);
+                    return null;
+            }
+        }
+        catch (Exception ex)
+        {
+            _log.LogError(ex, "Failed to create registered database for {Name}", name);
+            return null;
+        }
     }
 }

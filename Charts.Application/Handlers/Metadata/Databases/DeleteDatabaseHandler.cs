@@ -10,6 +10,7 @@ namespace Charts.Application.Handlers.Metadata.Databases
     public class DeleteDatabaseHandler(
         IDatabaseRepository repo,
         IUnitOfWork uow,
+        IDatabaseRegistry registry,
         ILogger<DeleteDatabaseHandler> logger
     ) : IRequestHandler<DeleteDatabaseCommand, ApiResponse<bool>>
     {
@@ -18,10 +19,14 @@ namespace Charts.Application.Handlers.Metadata.Databases
             await using var tx = await uow.BeginTransactionAsync(ct);
             try
             {
+                // Сначала удаляем из реестра
+                await registry.UnregisterAsync(command.Id, ct);
+
                 await repo.DeleteAsync(command.Id, ct);
                 await uow.SaveChangesAsync(ct);
                 await tx.CommitAsync(ct);
-                return ApiResponse <bool>.Ok(true);
+
+                return ApiResponse<bool>.Ok(true);
             }
             catch (Exception ex)
             {

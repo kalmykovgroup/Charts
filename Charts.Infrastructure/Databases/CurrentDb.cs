@@ -9,18 +9,45 @@ namespace Charts.Infrastructure.Databases
     {
         private readonly IRequestDbKeyAccessor _key;
         private readonly IDatabaseRegistry _reg;
+        private RegisteredDatabase? _cached;
 
         public CurrentDb(IRequestDbKeyAccessor key, IDatabaseRegistry reg)
         {
-            _key = key; _reg = reg;
+            _key = key;
+            _reg = reg;
         }
 
-        private RegisteredDatabase Current => _key.DbId is { } id ? _reg.ResolveById(id) : throw new InvalidOperationException("No database selected");
+        public Guid? Key => _key.DbId;
 
-        public Guid? Key => _key.DbId; 
-        public DbProviderType Provider => Current.Provider;
+        public DbProviderType Provider
+        {
+            get
+            {
+                if (_cached != null)
+                    return _cached.Provider;
+
+                if (_key.DbId is not { } id)
+                    throw new InvalidOperationException("No database selected");
+
+                // Синхронный fallback для свойства
+                if (_reg.TryResolveById(id, out var db))
+                {
+                    _cached = db;
+                    return db.Provider;
+                }
+
+                throw new InvalidOperationException($"Database with id '{id}' not found. Use OpenConnectionAsync first.");
+            }
+        }
 
         public async ValueTask<DbConnection> OpenConnectionAsync(CancellationToken ct = default)
-            => await Current.OpenConnectionAsync(ct);
+        {
+            if (_key.DbId is not { } id)
+                throw new InvalidOperationException("No database selected");
+
+            // Используем асинхронный метод с ленивой загрузкой
+            _cached ??= await _reg.ResolveByIdAsync(id, ct);
+            return await _cached.OpenConnectionAsync(ct);
+        }
     }
 }
