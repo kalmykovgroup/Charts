@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 
-namespace Charts.Api.Swagger
+namespace Charts.Infrastructure.Swagger
 {
     public static class BuilderSwaggerExtensions
     {

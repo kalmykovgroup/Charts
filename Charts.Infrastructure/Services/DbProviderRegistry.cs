@@ -1,7 +1,7 @@
-﻿using Charts.Api.Domain.Interfaces;
-using System.Data.Common;
+﻿using System.Data.Common;
+using Charts.Domain.Interfaces;
 
-namespace Charts.Api.Infrastructure.Services
+namespace Charts.Infrastructure.Services
 {
     public sealed class DbProviderRegistry : IDbProviderRegistry
     {

@@ -1,8 +1,8 @@
-﻿using Charts.Api.Application.Contracts;
-using Charts.Api.Application.Contracts.Metadata.Dtos;
-using Charts.Api.Domain.Contracts.Template;
+﻿using Charts.Domain.Contracts;
+using Charts.Domain.Contracts.Metadata.Dtos;
+using Charts.Domain.Contracts.Template;
 
-namespace Charts.Api.Application.Models
+namespace Charts.Domain.Models
 {
     public class ChartReqTemplate : BaseEntity
     { 

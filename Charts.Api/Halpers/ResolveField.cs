@@ -1,4 +1,4 @@
-﻿using Charts.Api.Application.Contracts.Metadata.Dtos;
+﻿using Charts.Domain.Contracts.Metadata.Dtos;
 
 namespace Charts.Api.Halpers
 {

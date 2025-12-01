@@ -1,4 +1,4 @@
-﻿using Charts.Api.Application.Interfaces;
+﻿using Charts.Domain.Interfaces;
 
 namespace Charts.Api.Middleware;
 // Middleware/RequestDbKeyMiddleware.cs

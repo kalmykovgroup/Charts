@@ -1,11 +1,6 @@
 ﻿using Serilog.Sinks.SystemConsole.Themes;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Api.Shared.Logger
+namespace Charts.Api.Logger
 {
     public class LogConsoleTheme
     {

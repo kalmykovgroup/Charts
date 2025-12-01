@@ -1,4 +1,4 @@
-﻿namespace Charts.Api.Application.Contracts.Metadata.Dtos
+﻿namespace Charts.Domain.Contracts.Metadata.Dtos
 {
     public class EntityDto
     {

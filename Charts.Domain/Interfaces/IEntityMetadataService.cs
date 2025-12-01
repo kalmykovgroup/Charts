@@ -1,8 +1,8 @@
-﻿using Charts.Api.Application.Contracts.Metadata.Dtos;
-using Charts.Api.Domain.Contracts.Types;
-using System.Data.Common;
+﻿using System.Data.Common;
+using Charts.Domain.Contracts.Metadata.Dtos;
+using Charts.Domain.Contracts.Types;
 
-namespace Charts.Api.Application.Interfaces;
+namespace Charts.Domain.Interfaces;
 
 public interface IEntityMetadataService
 {

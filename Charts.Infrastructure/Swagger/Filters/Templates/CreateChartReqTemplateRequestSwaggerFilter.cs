@@ -1,13 +1,12 @@
-﻿using Charts.Api.Swagger;
-using Charts.Api.Application.Contracts.Metadata.Dtos;
-using Charts.Api.Application.Contracts.Template.Requests;
-using Charts.Api.Domain.Contracts.Template;
-using Charts.Api.Domain.Contracts.Types;
-using Charts.Api.Infrastructure.Databases.Seeder;
+﻿using Charts.Domain.Contracts.Metadata.Dtos;
+using Charts.Domain.Contracts.Template;
+using Charts.Domain.Contracts.Template.Requests;
+using Charts.Domain.Contracts.Types;
+using Charts.Infrastructure.Databases.Seeder;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
-namespace Charts.Api.Swagger.Filters.Templates
+namespace Charts.Infrastructure.Swagger.Filters.Templates
 {
     public class CreateChartReqTemplateRequestSwaggerFilter : IOperationFilter
     {

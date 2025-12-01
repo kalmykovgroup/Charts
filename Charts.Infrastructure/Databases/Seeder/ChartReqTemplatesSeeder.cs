@@ -1,12 +1,11 @@
-﻿
-using Charts.Api.Application.Contracts.Metadata.Dtos;
-using Charts.Api.Application.Models;
-using Charts.Api.Domain.Contracts.Template;
-using Charts.Api.Domain.Contracts.Types;
+﻿using Charts.Domain.Contracts.Metadata.Dtos;
+using Charts.Domain.Contracts.Template;
+using Charts.Domain.Contracts.Types;
+using Charts.Domain.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Charts.Api.Infrastructure.Databases.Seeder
+namespace Charts.Infrastructure.Databases.Seeder
 {
     public class ChartReqTemplatesSeeder : ISeeder
     {

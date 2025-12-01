@@ -1,6 +1,6 @@
-﻿using Charts.Api.Application.Contracts;
+﻿using Charts.Domain.Contracts;
 
-namespace Charts.Api.Application.Interfaces
+namespace Charts.Domain.Interfaces
 {
     public interface IDatabaseRegistry
     {

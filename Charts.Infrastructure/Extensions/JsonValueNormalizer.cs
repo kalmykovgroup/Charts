@@ -1,7 +1,6 @@
-﻿namespace Charts.Api.Infrastructure.Extensions;
+﻿using System.Text.Json;
 
-using System.Text.Json;
-
+namespace Charts.Infrastructure.Extensions;
 
 public static class JsonValueNormalizer
 {

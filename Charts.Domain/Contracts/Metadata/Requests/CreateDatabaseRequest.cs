@@ -1,9 +1,6 @@
-﻿using Charts.Api.Application.Contracts.Metadata.Dtos;
-using Charts.Api.Application.Contracts.Template.Dtos;
-using Charts.Api.Application.Models;
-using Charts.Api.Domain.Contracts.Types;
+﻿using Charts.Domain.Contracts.Types;
 
-namespace Charts.Api.Application.Contracts.Metadata.Requests
+namespace Charts.Domain.Contracts.Metadata.Requests
 {
     public class CreateDatabaseRequest
     {

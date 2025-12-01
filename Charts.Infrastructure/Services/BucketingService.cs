@@ -1,9 +1,9 @@
-﻿using Charts.Api.Application.Contracts.Charts.Dtos;
-using Charts.Api.Application.Interfaces;
+﻿using System.Runtime.InteropServices;
+using Charts.Domain.Contracts.Charts.Dtos;
+using Charts.Domain.Interfaces;
 using Microsoft.Extensions.Logging;
-using System.Runtime.InteropServices;
 
-namespace Charts.Api.Infrastructure.Services
+namespace Charts.Infrastructure.Services
 {
     /// <summary>
     /// Агрегатор точек во временные ведра.

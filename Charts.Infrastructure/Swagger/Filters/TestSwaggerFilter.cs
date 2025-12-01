@@ -1,7 +1,7 @@
 ﻿using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
-namespace Charts.Api.Swagger.Filters
+namespace Charts.Infrastructure.Swagger.Filters
 { 
     public class TestSwaggerFilter : IOperationFilter
     {

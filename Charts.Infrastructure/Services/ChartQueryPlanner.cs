@@ -1,12 +1,12 @@
-﻿using Charts.Api.Application.Contracts.Metadata.Dtos;
-using Charts.Api.Domain.Contracts.Template;
-using Charts.Api.Domain.Contracts.Template.Dtos;
-using Charts.Api.Infrastructure.Options;
+﻿using System.Data.Common;
+using Charts.Domain.Contracts.Metadata.Dtos;
+using Charts.Domain.Contracts.Template;
+using Charts.Domain.Contracts.Template.Dtos;
+using Charts.Infrastructure.Options;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using System.Data.Common;
 
-namespace Charts.Api.Infrastructure.Services;
+namespace Charts.Infrastructure.Services;
 
 /// <summary>
 /// Планировщик: собирает входные данные для построения запроса (from/to, where, params, bucketMilliseconds и т.п.).

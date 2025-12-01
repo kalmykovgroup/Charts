@@ -1,8 +1,8 @@
-﻿using Charts.Api.Application.Contracts.Charts.Requests;
-using Charts.Api.Application.Contracts.Charts.Responces; 
-using System.Data.Common;
+﻿using System.Data.Common;
+using Charts.Domain.Contracts.Charts.Requests;
+using Charts.Domain.Contracts.Charts.Responces;
 
-namespace Charts.Api.Application.Interfaces
+namespace Charts.Domain.Interfaces
 {
     // Контракты, которые уже есть у вас в проекте:
     // - IChartsDbResolver

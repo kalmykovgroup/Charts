@@ -1,4 +1,4 @@
-﻿namespace Charts.Api.Application.Contracts.Charts.Dtos
+﻿namespace Charts.Domain.Contracts.Charts.Dtos
 {
     public class SeriesBinDto
     {

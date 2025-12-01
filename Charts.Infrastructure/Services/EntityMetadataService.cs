@@ -1,13 +1,12 @@
-﻿ 
-using Charts.Api.Application.Contracts.Metadata.Dtos;
-using Charts.Api.Domain.Contracts.Types;
-using Charts.Api.Infrastructure.Databases;
-using Charts.Api.Infrastructure.Utils;
-using System.Data;
+﻿using System.Data;
 using System.Data.Common;
-using Charts.Api.Application.Interfaces;
+using Charts.Domain.Contracts.Metadata.Dtos;
+using Charts.Domain.Contracts.Types;
+using Charts.Domain.Interfaces;
+using Charts.Infrastructure.Databases;
+using Charts.Infrastructure.Utils;
 
-namespace Charts.Api.Infrastructure.Services;
+namespace Charts.Infrastructure.Services;
 
 
 

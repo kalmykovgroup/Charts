@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(where:*)",
+      "Bash(dotnet --list-sdks:*)",
+      "Bash(dotnet --list-runtimes:*)",
+      "Bash(\"C:\\Program Files\\dotnet\\dotnet.exe\" --list-runtimes)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

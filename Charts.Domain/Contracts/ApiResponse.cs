@@ -1,4 +1,4 @@
-﻿namespace Charts.Api.Application.Contracts
+﻿namespace Charts.Domain.Contracts
 {
     public sealed class ApiResponse<T>
     {

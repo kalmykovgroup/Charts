@@ -1,4 +1,4 @@
-﻿namespace Api.Shared.Extensions
+﻿namespace Charts.Api.Extensions
 {
     public static class StringExtensions
     {

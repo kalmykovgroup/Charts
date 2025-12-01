@@ -1,4 +1,4 @@
-﻿namespace Charts.Api.Infrastructure.Options
+﻿namespace Charts.Infrastructure.Options
 {
     public sealed class ChartsOptions
     {

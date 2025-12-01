@@ -1,7 +1,7 @@
-﻿using Charts.Api.Application.Interfaces;
+﻿using Charts.Domain.Interfaces;
 using Microsoft.EntityFrameworkCore.Storage;
 
-namespace Charts.Api.Infrastructure.Databases
+namespace Charts.Infrastructure.Databases
 {
     public class EfTransactionWrapper : ITransaction
     {

@@ -1,6 +1,6 @@
 ﻿using System.Linq.Expressions;
 
-namespace Charts.Api.Application.Interfaces.Repositories.CommonInterfaces
+namespace Charts.Domain.Interfaces.Repositories.CommonInterfaces
 {
     public interface IGetByIdRepository<TEntity> where TEntity : class
     {

@@ -1,10 +1,10 @@
-﻿using Charts.Api.Application.Contracts;
-using Charts.Api.Application.Contracts.Charts.Responces;
-using Charts.Api.Application.Interfaces;
-using Charts.Api.Application.QueryAndCommands.Chart;
+﻿using Charts.Application.QueryAndCommands.Chart;
+using Charts.Domain.Contracts;
+using Charts.Domain.Contracts.Charts.Responces;
+using Charts.Domain.Interfaces;
 using MediatR;
 
-namespace Charts.Api.Application.Handlers.Charts
+namespace Charts.Application.Handlers.Charts
 {
     public sealed class GetMultiSeriesHandler(ICurrentDb db, IChartDataService charts) : IRequestHandler<GetMultiSeriesQuery, ApiResponse<MultiSeriesResponse>>
     {

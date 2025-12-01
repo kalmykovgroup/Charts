@@ -1,7 +1,7 @@
-﻿using Charts.Api.Domain.Contracts.Template;
+﻿using Charts.Domain.Contracts.Template;
 using Npgsql;
 
-namespace Charts.Api.Infrastructure.Services
+namespace Charts.Infrastructure.Services
 {
     public sealed record CompiledWhere(string Sql, IReadOnlyList<NpgsqlParameter> Parameters);
 

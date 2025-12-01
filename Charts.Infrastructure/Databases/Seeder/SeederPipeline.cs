@@ -1,6 +1,4 @@
-﻿using Charts.Api.Infrastructure.Databases.Seeder;
-
-namespace Charts.Api.Infrastructure.Databases.Seed
+﻿namespace Charts.Infrastructure.Databases.Seeder
 {
     public class SeederPipeline
     {

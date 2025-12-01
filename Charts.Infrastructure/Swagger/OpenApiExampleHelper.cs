@@ -1,6 +1,6 @@
 ﻿using Microsoft.OpenApi.Any;
 
-namespace Charts.Api.Swagger
+namespace Charts.Infrastructure.Swagger
 {
     public static class OpenApiExampleHelper
     {

@@ -1,12 +1,7 @@
-﻿using Charts.Api.Domain.Contracts.Types;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
+﻿using System.Text.RegularExpressions;
+using Charts.Domain.Contracts.Types;
 
-namespace Charts.Api.Infrastructure.Utils
+namespace Charts.Infrastructure.Utils
 {
     public static class SqlParamTypeMapper
     {

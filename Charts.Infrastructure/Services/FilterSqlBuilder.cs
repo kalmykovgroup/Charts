@@ -1,11 +1,12 @@
-﻿using Charts.Api.Application.Contracts.Metadata.Dtos;
-using Charts.Api.Domain.Contracts.Template;
-using Charts.Api.Domain.Contracts.Types;
-using Npgsql;
-using NpgsqlTypes;
+﻿using System.Collections;
 using System.Globalization;
 using System.Text;
 using System.Text.RegularExpressions;
+using Charts.Domain.Contracts.Metadata.Dtos;
+using Charts.Domain.Contracts.Template;
+using Charts.Domain.Contracts.Types;
+using Npgsql;
+using NpgsqlTypes;
 
 public static class FilterSqlBuilder
 {
@@ -402,7 +403,7 @@ public static class FilterSqlBuilder
     private static List<object?> ToList(object? v)
     {
         if (v is null or DBNull) return new();
-        if (v is System.Collections.IEnumerable e && v is not string)
+        if (v is IEnumerable e && v is not string)
         {
             var list = new List<object?>();
             foreach (var it in e) list.Add(it);

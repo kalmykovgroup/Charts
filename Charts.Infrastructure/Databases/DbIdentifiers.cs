@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace Charts.Api.Infrastructure.Databases;
+namespace Charts.Infrastructure.Databases;
 
 
 

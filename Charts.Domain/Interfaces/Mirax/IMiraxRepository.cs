@@ -1,8 +1,8 @@
-﻿using Charts.Api.Domain.Contracts.Types;
-using Charts.Api.Domain.Mirax;
-using System.Data.Common;
+﻿using System.Data.Common;
+using Charts.Domain.Contracts.Types;
+using Charts.Domain.Mirax;
 
-namespace Charts.Api.Domain.Interfaces.Mirax
+namespace Charts.Domain.Interfaces.Mirax
 {
 
     public interface IMiraxRepository

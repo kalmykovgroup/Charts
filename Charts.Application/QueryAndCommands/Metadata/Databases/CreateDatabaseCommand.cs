@@ -1,9 +1,9 @@
-﻿using Charts.Api.Application.Contracts;
-using Charts.Api.Application.Contracts.Metadata.Dtos;
-using Charts.Api.Application.Contracts.Metadata.Requests;
+﻿using Charts.Domain.Contracts;
+using Charts.Domain.Contracts.Metadata.Dtos;
+using Charts.Domain.Contracts.Metadata.Requests;
 using MediatR;
 
-namespace Charts.Api.Application.QueryAndCommands.Metadata.Databases
+namespace Charts.Application.QueryAndCommands.Metadata.Databases
 {
     public record CreateDatabaseCommand(
         CreateDatabaseRequest Request

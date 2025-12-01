@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
-using Charts.Api.Application.Contracts.Metadata.Dtos;
-using Charts.Api.Application.Contracts.Metadata.Requests;
-using Charts.Api.Application.Models;
+using Charts.Domain.Contracts.Metadata.Dtos;
+using Charts.Domain.Contracts.Metadata.Requests;
+using Charts.Domain.Models;
 
-namespace Charts.Api.Infrastructure.Mapper
+namespace Charts.Infrastructure.Mapper
 {
     public sealed class DatabasesProfile : Profile
     {

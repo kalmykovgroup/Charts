@@ -1,9 +1,8 @@
-﻿using Charts.Api.Application.Contracts;
-using Charts.Api.Application.Contracts.Metadata.Dtos;
-using Charts.Api.Application.Models;
+﻿using Charts.Domain.Contracts;
+using Charts.Domain.Contracts.Metadata.Dtos;
 using MediatR;
 
-namespace Charts.Api.Application.QueryAndCommands.Metadata.Databases
+namespace Charts.Application.QueryAndCommands.Metadata.Databases
 { 
     public sealed record GetAllDatabasesQuery() : IRequest<ApiResponse<List<DatabaseDto>>>;
 }

@@ -1,13 +1,12 @@
 ﻿// C:\...\Charts.Api.Infrastructure\Services\Test\PostgresSqlRequestFactory.cs
-using Charts.Api.Application.Interfaces;
-using Charts.Api.Domain.Contracts.Template;
-using Charts.Api.Domain.Contracts.Template.Dtos;
+
+using System.Text;
+using Charts.Domain.Contracts.Template;
 using Microsoft.Extensions.Logging;
 using Npgsql;
 using NpgsqlTypes;
-using System.Text;
 
-namespace Charts.Api.Infrastructure.Services
+namespace Charts.Infrastructure.Services
 {
     public sealed class PostgresSqlRequestFactory : ISqlRequestFactory
     {

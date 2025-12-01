@@ -1,11 +1,11 @@
-﻿using Charts.Api.Application.Contracts;
-using Charts.Api.Application.Interfaces;
-using Charts.Api.Application.QueryAndCommands.Mirax;
-using Charts.Api.Domain.Interfaces.Mirax;
-using Charts.Api.Domain.Mirax;
+﻿using Charts.Application.QueryAndCommands.Mirax;
+using Charts.Domain.Contracts;
+using Charts.Domain.Interfaces;
+using Charts.Domain.Interfaces.Mirax;
+using Charts.Domain.Mirax;
 using MediatR;
 
-namespace Charts.Api.Application.Handlers.Mirax
+namespace Charts.Application.Handlers.Mirax
 {
     // Handler  Получить устройства для испытания
     public sealed class GetPortableDevicesHandler : IRequestHandler<GetPortableDevicesQuery, ApiResponse<List<PortableDeviceDto>>>

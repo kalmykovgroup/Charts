@@ -1,12 +1,12 @@
-using Charts.Api.Application.Contracts.Charts.Dtos;
-using Charts.Api.Domain.Contracts.Template;
 using System.Data.Common;
+using Charts.Domain.Contracts.Charts.Dtos;
+using Charts.Domain.Contracts.Template;
 
-namespace Charts.Api.Application.Interfaces
+namespace Charts.Domain.Interfaces
 {
     /// <summary>
-    /// READ ONLY ридер для сырых точек временного ряда.
-    /// Вариант B: SqlFilter содержит только WhereSql; каталог параметров и runtime-значения приходят отдельно.
+    /// READ ONLY пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ.
+    /// пїЅпїЅпїЅпїЅпїЅпїЅпїЅ B: SqlFilter пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ WhereSql; пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ runtime-пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
     /// </summary>
     public interface IRawSeriesReader
     {

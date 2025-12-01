@@ -1,4 +1,4 @@
-﻿namespace Charts.Api.Application.Interfaces
+﻿namespace Charts.Domain.Interfaces
 {
     public interface IEntity
     {

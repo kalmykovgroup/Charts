@@ -2,10 +2,10 @@
 using System.Globalization;
 using System.Text.Json;
 using System.Text.RegularExpressions;
-using Charts.Api.Domain.Contracts.Template;
+using Charts.Domain.Contracts.Template;
 using Microsoft.Extensions.Logging;
 
-namespace Charts.Api.Infrastructure.Extensions
+namespace Charts.Infrastructure.Extensions
 {
     public static class TemplateParamResolver
     {

@@ -1,5 +1,4 @@
-﻿using Charts.Api.Infrastructure.Databases.Seed;
-using Charts.Api.Infrastructure.Databases.Seeder;
+﻿using Charts.Infrastructure.Databases.Seeder;
 
 namespace Charts.Api.Extensions
 {

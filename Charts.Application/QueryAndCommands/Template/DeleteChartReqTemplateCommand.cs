@@ -1,7 +1,7 @@
-﻿using Charts.Api.Application.Contracts;
+﻿using Charts.Domain.Contracts;
 using MediatR;
 
-namespace Charts.Api.Application.QueryAndCommands.Template
+namespace Charts.Application.QueryAndCommands.Template
 {
     public record DeleteChartReqTemplateCommand(Guid Id) : IRequest<ApiResponse<bool>>;
 }

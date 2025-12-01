@@ -1,8 +1,7 @@
-﻿using Charts.Api.Application.Contracts.Template.Dtos;
-using Charts.Api.Application.Models;
-using Charts.Api.Domain.Contracts.Types;
+﻿using Charts.Domain.Contracts.Template.Dtos;
+using Charts.Domain.Contracts.Types;
 
-namespace Charts.Api.Application.Contracts.Metadata.Dtos
+namespace Charts.Domain.Contracts.Metadata.Dtos
 {
     public class DatabaseDto
     {

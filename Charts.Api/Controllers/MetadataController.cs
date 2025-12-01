@@ -1,8 +1,8 @@
-﻿using Charts.Api.Application.Contracts.Template.Requests;
-using Charts.Api.Application.QueryAndCommands.Metadata;
-using Charts.Api.Application.QueryAndCommands.Metadata.Databases;
-using Charts.Api.Application.QueryAndCommands.Template;
-using Charts.Api.Middleware;
+﻿using Charts.Api.Middleware;
+using Charts.Application.QueryAndCommands.Metadata;
+using Charts.Application.QueryAndCommands.Metadata.Databases;
+using Charts.Application.QueryAndCommands.Template;
+using Charts.Domain.Contracts.Template.Requests;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

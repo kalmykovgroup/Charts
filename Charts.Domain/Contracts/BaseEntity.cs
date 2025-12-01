@@ -1,6 +1,6 @@
-﻿using Charts.Api.Application.Interfaces;
+﻿using Charts.Domain.Interfaces;
 
-namespace Charts.Api.Application.Contracts
+namespace Charts.Domain.Contracts
 {
     public abstract class BaseEntity : IEntity
     {

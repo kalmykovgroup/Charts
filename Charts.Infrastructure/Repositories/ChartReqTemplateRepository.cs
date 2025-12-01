@@ -1,8 +1,8 @@
-﻿using Charts.Api.Application.Interfaces.Repositories;
-using Charts.Api.Application.Models;
-using Charts.Api.Infrastructure.Databases;
+﻿using Charts.Domain.Interfaces.Repositories;
+using Charts.Domain.Models;
+using Charts.Infrastructure.Databases;
 
-namespace Charts.Api.Infrastructure.Repositories
+namespace Charts.Infrastructure.Repositories
 {
     public class ChartReqTemplateRepository(AppDbContext dbContext) : RepositoryBase<ChartReqTemplate>(dbContext), IChartReqTemplateRepository
     {

@@ -1,4 +1,4 @@
-﻿namespace Charts.Api.Application.Interfaces.Repositories.CommonInterfaces
+﻿namespace Charts.Domain.Interfaces.Repositories.CommonInterfaces
 { 
     public interface IAddRangeRepository<TEntity> where TEntity : class
     {

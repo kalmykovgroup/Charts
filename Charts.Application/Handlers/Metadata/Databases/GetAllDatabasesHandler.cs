@@ -1,16 +1,15 @@
-﻿using AutoMapper;
-using Charts.Api.Application.Interfaces;
-using Charts.Api.Application.Contracts;
-using Charts.Api.Application.Contracts.Metadata.Dtos;
-using Charts.Api.Application.Interfaces.Repositories;
-using Charts.Api.Application.QueryAndCommands.Metadata.Databases;
-using Charts.Api.Domain.Contracts.Types;
-using Charts.Api.Domain.Interfaces;
+﻿using System.Data.Common;
+using AutoMapper;
+using Charts.Application.QueryAndCommands.Metadata.Databases;
+using Charts.Domain.Contracts;
+using Charts.Domain.Contracts.Metadata.Dtos;
+using Charts.Domain.Contracts.Types;
+using Charts.Domain.Interfaces;
+using Charts.Domain.Interfaces.Repositories;
 using MediatR;
 using Microsoft.Extensions.Logging;
-using System.Data.Common;
 
-namespace Charts.Api.Application.Handlers.Metadata.Databases;
+namespace Charts.Application.Handlers.Metadata.Databases;
  
 
 public sealed class GetAllDatabasesHandler(

@@ -1,9 +1,7 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace Charts.Api.Domain.Contracts.Types
+namespace Charts.Domain.Contracts.Types
 {
-    using System.Text.Json.Serialization;
-
     [JsonConverter(typeof(JsonStringEnumConverter))]
     public enum FilterOp
     {

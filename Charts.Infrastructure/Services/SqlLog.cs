@@ -1,9 +1,9 @@
-﻿using Npgsql;
-using NpgsqlTypes;
-using System.Globalization;
+﻿using System.Globalization;
 using System.Text;
+using Npgsql;
+using NpgsqlTypes;
 
-namespace Charts.Api.Infrastructure.Services;
+namespace Charts.Infrastructure.Services;
 
 
  

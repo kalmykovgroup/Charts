@@ -1,9 +1,7 @@
-﻿
-using Charts.Api.Application.Contracts;
-using Charts.Api.Domain.Contracts.Types;
-using System.Data.Common;
+﻿using System.Data.Common;
+using Charts.Domain.Contracts.Types;
 
-namespace Charts.Api.Application.Interfaces
+namespace Charts.Domain.Interfaces
 {
 
     public interface ICurrentDb

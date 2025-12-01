@@ -1,6 +1,6 @@
-﻿using Charts.Api.Domain.Interfaces;
+﻿using Charts.Domain.Interfaces;
 
-namespace Charts.Api.Infrastructure.Startup
+namespace Charts.Infrastructure.Startup
 {
     public sealed class AppReadiness : IAppReadiness
     {

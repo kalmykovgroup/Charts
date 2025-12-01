@@ -1,12 +1,11 @@
 ﻿// ============================================================================
 // MetaDbWarmupWorker.cs
 // ============================================================================
-using Charts.Api.Application.Interfaces;
-using Charts.Api.Domain.Interfaces;
-using Charts.Api.Infrastructure.Databases;
-using Charts.Api.Infrastructure.Databases.Seed;
-using Charts.Api.Infrastructure.Databases.Seeder;
-using Charts.Api.Infrastructure.Options;
+
+using Charts.Domain.Interfaces;
+using Charts.Infrastructure.Databases;
+using Charts.Infrastructure.Databases.Seeder;
+using Charts.Infrastructure.Options;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -15,7 +14,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Npgsql;
 
-namespace Charts.Api.Infrastructure.Startup;
+namespace Charts.Infrastructure.Startup;
 
 /// <summary>
 /// Фоновый worker для инициализации мета-БД (создание, миграции, проверка подключения).

@@ -1,4 +1,4 @@
-﻿namespace Charts.Api.Domain.Contracts.Template
+﻿namespace Charts.Domain.Contracts.Template
 {
 
     /// <summary>

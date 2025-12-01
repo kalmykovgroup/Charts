@@ -1,12 +1,11 @@
-﻿using Charts.Api.Application.Contracts;
-using Charts.Api.Application.Contracts.Charts.Dtos;
-using Charts.Api.Application.Contracts.Charts.Requests;
-using Charts.Api.Application.Contracts.Charts.Responces;
-using Charts.Api.Application.Interfaces;
+﻿using System.Data.Common;
+using Charts.Domain.Contracts.Charts.Dtos;
+using Charts.Domain.Contracts.Charts.Requests;
+using Charts.Domain.Contracts.Charts.Responces;
+using Charts.Domain.Interfaces;
 using Microsoft.Extensions.Logging;
-using System.Data.Common;
 
-namespace Charts.Api.Infrastructure.Services
+namespace Charts.Infrastructure.Services
 {
     public sealed class ChartDataService : IChartDataService
     {

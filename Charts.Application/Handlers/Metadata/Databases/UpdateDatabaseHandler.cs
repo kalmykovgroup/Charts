@@ -1,13 +1,13 @@
 ﻿using AutoMapper;
-using Charts.Api.Application.Contracts;
-using Charts.Api.Application.Contracts.Metadata.Dtos;
-using Charts.Api.Application.Interfaces;
-using Charts.Api.Application.Interfaces.Repositories;
-using Charts.Api.Application.QueryAndCommands.Metadata.Databases;
+using Charts.Application.QueryAndCommands.Metadata.Databases;
+using Charts.Domain.Contracts;
+using Charts.Domain.Contracts.Metadata.Dtos;
+using Charts.Domain.Interfaces;
+using Charts.Domain.Interfaces.Repositories;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
-namespace Charts.Api.Application.Handlers.Metadata.Databases
+namespace Charts.Application.Handlers.Metadata.Databases
 {
     public class UpdateDatabaseHandler(
         IDatabaseRepository repo,

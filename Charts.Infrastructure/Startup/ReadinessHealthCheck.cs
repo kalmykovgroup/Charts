@@ -1,7 +1,7 @@
-﻿using Charts.Api.Domain.Interfaces;
+﻿using Charts.Domain.Interfaces;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 
-namespace Charts.Api.Infrastructure.Startup
+namespace Charts.Infrastructure.Startup
 {
     public sealed class ReadinessHealthCheck : IHealthCheck
     {

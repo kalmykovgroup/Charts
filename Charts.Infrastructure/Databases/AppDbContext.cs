@@ -1,9 +1,9 @@
-﻿using Charts.Api.Application.Contracts;
-using Charts.Api.Application.Models;
+﻿using System.Text;
+using Charts.Domain.Contracts;
+using Charts.Domain.Models;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
 
-namespace Charts.Api.Infrastructure.Databases
+namespace Charts.Infrastructure.Databases
 {
     public class AppDbContext : DbContext
     {
@@ -126,7 +126,7 @@ namespace Charts.Api.Infrastructure.Databases
             if (string.IsNullOrWhiteSpace(input))
                 return input;
 
-            var sb = new System.Text.StringBuilder();
+            var sb = new StringBuilder();
             var state = SnakeCaseState.Start;
 
             for (int i = 0; i < input.Length; i++)

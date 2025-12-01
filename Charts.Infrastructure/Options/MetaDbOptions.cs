@@ -1,4 +1,4 @@
-﻿namespace Charts.Api.Infrastructure.Options;
+﻿namespace Charts.Infrastructure.Options;
 
 /// <summary>
 /// Настройки инициализации схемы мета-БД (AppDbContext).

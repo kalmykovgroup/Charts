@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
-using Charts.Api.Application.Contracts;
-using Charts.Api.Application.Contracts.Template.Dtos;
-using Charts.Api.Application.Interfaces.Repositories;
-using Charts.Api.Application.QueryAndCommands.Template;
+using Charts.Application.QueryAndCommands.Template;
+using Charts.Domain.Contracts;
+using Charts.Domain.Contracts.Template.Dtos;
+using Charts.Domain.Interfaces.Repositories;
 using MediatR;
 
-namespace Charts.Api.Application.Handlers.ChartReqTemplates
+namespace Charts.Application.Handlers.ChartReqTemplates
 {
     public class GetAllChartReqTemplatesHandler(
         IChartReqTemplateRepository repo,

@@ -1,6 +1,5 @@
-﻿using Charts.Api.Application.QueryAndCommands.Metadata.Databases;
-using Charts.Api.Application.QueryAndCommands.Mirax;
-using Charts.Api.Middleware;
+﻿using Charts.Api.Middleware;
+using Charts.Application.QueryAndCommands.Mirax;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

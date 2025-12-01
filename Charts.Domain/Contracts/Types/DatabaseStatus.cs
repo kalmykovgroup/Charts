@@ -1,4 +1,4 @@
-﻿namespace Charts.Api.Domain.Contracts.Types
+﻿namespace Charts.Domain.Contracts.Types
 {
     public enum DatabaseStatus
     {

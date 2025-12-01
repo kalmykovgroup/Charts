@@ -1,8 +1,8 @@
-﻿using Charts.Api.Application.Contracts;
-using Charts.Api.Domain.Mirax;
+﻿using Charts.Domain.Contracts;
+using Charts.Domain.Mirax;
 using MediatR;
 
-namespace Charts.Api.Application.QueryAndCommands.Mirax
+namespace Charts.Application.QueryAndCommands.Mirax
 {
     // Получить устройства для испытания
     public sealed record GetPortableDevicesQuery(Guid TechnicalRunId)

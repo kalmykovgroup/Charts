@@ -1,9 +1,8 @@
-﻿using Charts.Api.Swagger;
-using Charts.Api.Infrastructure.Databases.Seeder;
+﻿using Charts.Infrastructure.Databases.Seeder;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
-namespace Charts.Api.Infrastructure.Swagger.Filters.Databases
+namespace Charts.Infrastructure.Swagger.Filters.Databases
 {
     public class GetEntityFieldsQuerySwaggerFilter : IOperationFilter
     {

@@ -1,4 +1,4 @@
-﻿namespace Charts.Api.Infrastructure.Databases.Seeder
+﻿namespace Charts.Infrastructure.Databases.Seeder
 {
     public static class SeederIds
     {

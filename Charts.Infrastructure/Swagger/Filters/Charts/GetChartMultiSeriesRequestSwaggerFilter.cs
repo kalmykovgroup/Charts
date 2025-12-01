@@ -1,14 +1,13 @@
-using Charts.Api.Swagger;
-using Charts.Api.Application.Contracts.Charts.Requests;
-using Charts.Api.Application.Contracts.Metadata.Dtos;
-using Charts.Api.Domain.Contracts.Template;
-using Charts.Api.Domain.Contracts.Template.Dtos;
-using Charts.Api.Domain.Contracts.Types;
-using Charts.Api.Infrastructure.Databases.Seeder;
+using Charts.Domain.Contracts.Charts.Requests;
+using Charts.Domain.Contracts.Metadata.Dtos;
+using Charts.Domain.Contracts.Template;
+using Charts.Domain.Contracts.Template.Dtos;
+using Charts.Domain.Contracts.Types;
+using Charts.Infrastructure.Databases.Seeder;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
-namespace Charts.Api.Infrastructure.Swagger.Filters.Charts
+namespace Charts.Infrastructure.Swagger.Filters.Charts
 {
     public sealed class GetChartMultiSeriesRequestSwaggerFilter : IOperationFilter
     {
@@ -27,21 +26,21 @@ namespace Charts.Api.Infrastructure.Swagger.Filters.Charts
                     ResolvedFromMs = new DateTimeOffset(DateTime.Parse("2025-08-29T15:00:00Z")).ToUnixTimeMilliseconds(),
                     ResolvedToMs = new DateTimeOffset(DateTime.Parse("2025-08-29T17:00:00Z")).ToUnixTimeMilliseconds(),
 
-                    // Настройки графика
-                    Entity = new EntityDto("public.DeviceEntity"), // поменяй на вашу таблицу/представление
-                    TimeField = new FieldDto("CreateDate", "date"),          // колонка времени
+                    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+                    Entity = new EntityDto("public.DeviceEntity"), // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ/пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+                    TimeField = new FieldDto("CreateDate", "date"),          // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
                     SelectedFields = new[] { new FieldDto("BatteryVoltage", "double"), new FieldDto("Temperature", "double") },
 
-                    // Типизированные фильтры. Для Between значение — массив,
-                    // здесь используем плейсхолдеры, которые придут в Values при запуске.
+                    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ. пїЅпїЅпїЅ Between пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ,
+                    // пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ Values пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
                     Where = new List<FilterClause>
                 {
                     new FilterClause(new FieldDto("FactoryNumber", "text"), FilterOp.Eq, "{{deviceId}}"),
                 },
-                    // Пользовательский SQL-фрагмент — в демо не нужен
+                    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ SQL-пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅ пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
                     Sql = null,
 
-                    // Params: убираем minVolt/maxVolt, добавляем один ключ volt
+                    // Params: пїЅпїЅпїЅпїЅпїЅпїЅпїЅ minVolt/maxVolt, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ volt
                     Params = new List<ReadySqlParam>
                     {
                         new ReadySqlParam(

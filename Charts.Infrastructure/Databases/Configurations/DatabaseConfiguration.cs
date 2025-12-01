@@ -1,11 +1,11 @@
-﻿using Charts.Api.Application.Contracts.Metadata.Dtos;
-using Charts.Api.Application.Models;
+﻿using System.Text.Json;
+using Charts.Domain.Contracts.Metadata.Dtos;
+using Charts.Domain.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System.Text.Json;
 
-namespace Charts.Api.Infrastructure.Databases.Configurations
+namespace Charts.Infrastructure.Databases.Configurations
 {
 
     public sealed class DatabaseConfiguration : IEntityTypeConfiguration<Database>

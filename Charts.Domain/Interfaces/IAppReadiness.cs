@@ -1,4 +1,4 @@
-﻿namespace Charts.Api.Domain.Interfaces
+﻿namespace Charts.Domain.Interfaces
 {
     public interface IAppReadiness
     {

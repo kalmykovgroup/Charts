@@ -1,11 +1,10 @@
-﻿using Charts.Api.Application.Interfaces;
-using Charts.Api.Application.Contracts;
-using Charts.Api.Application.Contracts.Metadata.Dtos;
-using Charts.Api.Application.Interfaces;
-using Charts.Api.Application.QueryAndCommands.Metadata;
+﻿using Charts.Application.QueryAndCommands.Metadata;
+using Charts.Domain.Contracts;
+using Charts.Domain.Contracts.Metadata.Dtos;
+using Charts.Domain.Interfaces;
 using MediatR;
 
-namespace Charts.Api.Application.Handlers.Metadata
+namespace Charts.Application.Handlers.Metadata
 {
     public sealed class GetEntitiesHandler(ICurrentDb db, IEntityMetadataService meta)
         : IRequestHandler<GetEntitiesQuery, ApiResponse<IReadOnlyList<EntityDto>>>

@@ -1,7 +1,6 @@
-﻿using Charts.Api.Application.Contracts.Metadata.Dtos; 
-using Charts.Api.Domain.Contracts.Template;
+﻿using Charts.Domain.Contracts.Metadata.Dtos;
 
-namespace Charts.Api.Application.Contracts.Template.Dtos
+namespace Charts.Domain.Contracts.Template.Dtos
 {
     public sealed class ChartReqTemplateDto
     {

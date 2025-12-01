@@ -1,9 +1,9 @@
-﻿using Charts.Api.Application.Contracts.Charts.Dtos;
-using Npgsql;
-using System.Data.Common;
+﻿using System.Data.Common;
 using System.Globalization;
+using Charts.Domain.Contracts.Charts.Dtos;
+using Npgsql;
 
-namespace Charts.Api.Infrastructure.Services;
+namespace Charts.Infrastructure.Services;
 
 public sealed class PostgresRawDataExecutor : IRawDataExecutor
 {

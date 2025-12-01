@@ -1,11 +1,8 @@
-﻿using Charts.Api.Swagger;
-using Charts.Api.Application.Contracts.Charts.Requests;
-using Charts.Api.Application.Contracts.Template.Requests;
-using Charts.Api.Infrastructure.Databases.Seeder;
+﻿using Charts.Infrastructure.Databases.Seeder;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
-namespace Charts.Api.Swagger.Filters.Templates
+namespace Charts.Infrastructure.Swagger.Filters.Templates
 {
     public class DeleteChartReqTemplateCommandSwaggerFilter : IOperationFilter
     {

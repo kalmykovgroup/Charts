@@ -1,4 +1,4 @@
-﻿namespace Charts.Api.Domain.Mirax
+﻿namespace Charts.Domain.Mirax
 {
     public class TechnicalRunToStartDto
     {

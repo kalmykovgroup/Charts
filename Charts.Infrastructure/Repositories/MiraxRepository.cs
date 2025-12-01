@@ -1,10 +1,10 @@
-﻿using Charts.Api.Domain.Contracts.Types;
-using Charts.Api.Domain.Interfaces.Mirax;
-using Charts.Api.Domain.Mirax;
-using Dapper; 
-using System.Data.Common; 
+﻿using System.Data.Common;
+using Charts.Domain.Contracts.Types;
+using Charts.Domain.Interfaces.Mirax;
+using Charts.Domain.Mirax;
+using Dapper;
 
-namespace Charts.Api.Infrastructure.Repositories
+namespace Charts.Infrastructure.Repositories
 {
  
 

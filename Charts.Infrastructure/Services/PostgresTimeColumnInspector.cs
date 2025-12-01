@@ -1,7 +1,7 @@
-﻿using Npgsql;
-using System.Data.Common;
+﻿using System.Data.Common;
+using Npgsql;
 
-namespace Charts.Api.Infrastructure.Services;
+namespace Charts.Infrastructure.Services;
 
 public sealed class PostgresTimeColumnInspector : ITimeColumnInspector
 {

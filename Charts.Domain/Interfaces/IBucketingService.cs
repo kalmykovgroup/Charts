@@ -1,6 +1,6 @@
-using Charts.Api.Application.Contracts.Charts.Dtos;
+using Charts.Domain.Contracts.Charts.Dtos;
 
-namespace Charts.Api.Application.Interfaces
+namespace Charts.Domain.Interfaces
 {
     public interface IBucketingService
     {

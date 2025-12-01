@@ -1,7 +1,7 @@
-﻿using Charts.Api.Application.Interfaces.Repositories.CommonInterfaces;
-using Charts.Api.Application.Models;
+﻿using Charts.Domain.Interfaces.Repositories.CommonInterfaces;
+using Charts.Domain.Models;
 
-namespace Charts.Api.Application.Interfaces.Repositories
+namespace Charts.Domain.Interfaces.Repositories
 { 
 
     public interface IDatabaseRepository :

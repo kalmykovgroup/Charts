@@ -1,12 +1,12 @@
 ﻿using AutoMapper;
-using Charts.Api.Application.Contracts.Template.Dtos;
-using Charts.Api.Application.Contracts.Template.Requests;
-using Charts.Api.Application.Models;
-using Charts.Api.Domain.Contracts.Template;
-using Charts.Api.Domain.Contracts.Types;
-using Charts.Api.Infrastructure.Extensions;
+using Charts.Domain.Contracts.Template;
+using Charts.Domain.Contracts.Template.Dtos;
+using Charts.Domain.Contracts.Template.Requests;
+using Charts.Domain.Contracts.Types;
+using Charts.Domain.Models;
+using Charts.Infrastructure.Extensions;
 
-namespace Charts.Api.Infrastructure.Mapper;
+namespace Charts.Infrastructure.Mapper;
 
 public sealed class ChartReqTemplatesProfile : Profile
 {

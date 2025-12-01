@@ -1,7 +1,7 @@
-﻿using Charts.Api.Application.Contracts.Charts.Dtos;
-using Charts.Api.Application.Contracts.Metadata.Dtos;
+﻿using Charts.Domain.Contracts.Charts.Dtos;
+using Charts.Domain.Contracts.Metadata.Dtos;
 
-namespace Charts.Api.Application.Contracts.Charts.Responces
+namespace Charts.Domain.Contracts.Charts.Responces
 {
     public class MultiSeriesResponse
     {

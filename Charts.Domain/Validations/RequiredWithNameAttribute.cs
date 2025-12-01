@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Charts.Api.Infrastructure.Validations
+namespace Charts.Domain.Validations
 {
     public class RequiredWithNameAttribute : ValidationAttribute
     {

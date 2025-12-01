@@ -1,9 +1,9 @@
-﻿using Charts.Api.Domain.Contracts.Types;
-using Charts.Api.Infrastructure.Validations;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
+using Charts.Domain.Contracts.Types;
+using Charts.Domain.Validations;
 
-namespace Charts.Api.Application.Contracts.Metadata.Dtos
+namespace Charts.Domain.Contracts.Metadata.Dtos
 {
     public class FieldDto
     {

@@ -1,13 +1,14 @@
-﻿using Charts.Api.Application.Contracts.Metadata.Dtos;
-using Charts.Api.Domain.Contracts.Types;
-using Charts.Api.Infrastructure.Utils;
-using Charts.Api.Domain.Contracts.Template;
-using Npgsql;
+﻿using System.Collections;
 using System.Text;
 using System.Text.Json;
 using System.Text.RegularExpressions;
+using Charts.Domain.Contracts.Metadata.Dtos;
+using Charts.Domain.Contracts.Template;
+using Charts.Domain.Contracts.Types;
+using Charts.Infrastructure.Utils;
+using Npgsql;
 
-namespace Charts.Api.Infrastructure.Services;
+namespace Charts.Infrastructure.Services;
 
 public sealed class PostgresWhereCompiler : IWhereCompiler
 {
@@ -124,7 +125,7 @@ public sealed class PostgresWhereCompiler : IWhereCompiler
         }
 
         // литеральный список → создаём временный ReadySqlParam c Field.Type массива
-        if (un is System.Collections.IEnumerable seq && un is not string)
+        if (un is IEnumerable seq && un is not string)
         {
             var tempKey = "p" + ps.Count;
             // гарантируем, что тип — массивный: если Field.Type не заканчивается [] — добавим
@@ -147,7 +148,7 @@ public sealed class PostgresWhereCompiler : IWhereCompiler
     {
         var un = Unwrap(value);
 
-        if (un is System.Collections.IEnumerable seq && un is not string)
+        if (un is IEnumerable seq && un is not string)
         {
             var list = new List<object?>();
             foreach (var it in seq) list.Add(it);

@@ -1,11 +1,9 @@
-﻿using Charts.Api.Application.Contracts.Metadata.Dtos;
-using Charts.Api.Application.Models;
-using Charts.Api.Domain.Contracts.Types;
-using Charts.Api.Infrastructure.Databases.Seeder;
+﻿using Charts.Domain.Contracts.Types;
+using Charts.Domain.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Charts.Api.Infrastructure.Databases.Seed
+namespace Charts.Infrastructure.Databases.Seeder
 {
     public class DatabasesSeeder : ISeeder
     { 

@@ -1,9 +1,8 @@
-﻿using Microsoft.AspNetCore.Routing;
-using Microsoft.OpenApi.Any;
+﻿using Microsoft.OpenApi.Any;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
-namespace Charts.Api.Swagger
+namespace Charts.Infrastructure.Swagger
 {
     public static class SwaggerParams
     {

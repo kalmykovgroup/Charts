@@ -1,33 +1,37 @@
-﻿using Charts.Api.Application.Contracts;
-using Charts.Api.Application.Interfaces;
-using Charts.Api.Application.Interfaces.Repositories;
-using Charts.Api.Application.QueryAndCommands.Metadata.Databases;
-using Charts.Api.Domain.Interfaces;
-using Charts.Api.Domain.Interfaces.Mirax;
-using Charts.Api.Extensions;                 // AddCommonSwaggerServices, AddSeederServices
+﻿using System.Data.Common;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using Charts.Api.Extensions;
 using Charts.Api.Halpers;
-using Charts.Api.Infrastructure.Databases;
-using Charts.Api.Infrastructure.Mapper;
-using Charts.Api.Infrastructure.Options;
-using Charts.Api.Infrastructure.Repositories;
-using Charts.Api.Infrastructure.Services;
-using Charts.Api.Infrastructure.Startup;
 using Charts.Api.Middleware;
-using Charts.Api.Swagger;
+using Charts.Application.QueryAndCommands.Metadata.Databases;
+using Charts.Domain.Contracts;
+using Charts.Domain.Interfaces;
+using Charts.Domain.Interfaces.Mirax;
+using Charts.Domain.Interfaces.Repositories;
+using Charts.Infrastructure.Databases;
+using Charts.Infrastructure.Mapper;
+using Charts.Infrastructure.Options;
+using Charts.Infrastructure.Repositories;
+using Charts.Infrastructure.Services;
+using Charts.Infrastructure.Startup;
+using Charts.Infrastructure.Swagger;
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.HttpOverrides;
-using Microsoft.Data.SqlClient;              // SQL Server
-using Microsoft.Data.Sqlite;                 // SQLite
+using Microsoft.Data.SqlClient;
+using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
-using MySqlConnector;                        // MySQL/MariaDB
-using Npgsql;                                // Postgres
+using MySqlConnector;
+using Npgsql;
 using Serilog;
 using Serilog.Events;
 using Serilog.Sinks.SystemConsole.Themes;
-using System;
-using System.Data.Common;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+// AddCommonSwaggerServices, AddSeederServices
+// SQL Server
+// SQLite
+// MySQL/MariaDB
+// Postgres
 
 namespace Charts.Api
 {
@@ -211,7 +215,7 @@ namespace Charts.Api
             {
                 errApp.Run(async context =>
                 {
-                    var feature = context.Features.Get<Microsoft.AspNetCore.Diagnostics.IExceptionHandlerPathFeature>();
+                    var feature = context.Features.Get<IExceptionHandlerPathFeature>();
                     context.Response.StatusCode = StatusCodes.Status500InternalServerError;
                     context.Response.ContentType = "application/json";
 

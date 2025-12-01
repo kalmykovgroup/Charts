@@ -1,9 +1,9 @@
-﻿using Charts.Api.Application.Contracts;
-using Charts.Api.Application.Contracts.Charts.Dtos;
-using Charts.Api.Application.Contracts.Charts.Requests;
-using Charts.Api.Application.Contracts.Charts.Responces;
-using Charts.Api.Application.QueryAndCommands.Chart;
-using Charts.Api.Middleware;
+﻿using Charts.Api.Middleware;
+using Charts.Application.QueryAndCommands.Chart;
+using Charts.Domain.Contracts;
+using Charts.Domain.Contracts.Charts.Dtos;
+using Charts.Domain.Contracts.Charts.Requests;
+using Charts.Domain.Contracts.Charts.Responces;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

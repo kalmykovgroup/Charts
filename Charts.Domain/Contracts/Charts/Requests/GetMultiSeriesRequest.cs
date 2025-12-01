@@ -1,7 +1,6 @@
-﻿using Charts.Api.Application.Contracts.Template.Dtos;
-using Charts.Api.Domain.Contracts.Template.Dtos;
+﻿using Charts.Domain.Contracts.Template.Dtos;
 
-namespace Charts.Api.Application.Contracts.Charts.Requests
+namespace Charts.Domain.Contracts.Charts.Requests
 {
     /// <summary>
     /// Несколько серий по шаблону (одна сущность, общие фильтры).

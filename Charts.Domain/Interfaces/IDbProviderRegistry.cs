@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Common;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Data.Common;
 
-namespace Charts.Api.Domain.Interfaces
+namespace Charts.Domain.Interfaces
 {
     public interface IDbProviderRegistry
     {

@@ -1,10 +1,11 @@
-﻿using Charts.Api.Domain.Contracts.Template;
-using Npgsql;
-using NpgsqlTypes;
+﻿using System.Collections;
 using System.Globalization;
 using System.Text.Json;
+using Charts.Domain.Contracts.Template;
+using Npgsql;
+using NpgsqlTypes;
 
-namespace Charts.Api.Infrastructure.Services;
+namespace Charts.Infrastructure.Services;
 
 public static class PgParamFactory
 {
@@ -126,7 +127,7 @@ public static class PgParamFactory
             };
         }
 
-        if (value is System.Collections.IEnumerable seq && value is not string)
+        if (value is IEnumerable seq && value is not string)
         {
             switch (elemType)
             {

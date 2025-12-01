@@ -1,9 +1,9 @@
-﻿using Charts.Api.Application.Interfaces;
-using Charts.Api.Infrastructure.Databases;
+﻿using System.Linq.Expressions;
+using Charts.Domain.Interfaces;
+using Charts.Infrastructure.Databases;
 using Microsoft.EntityFrameworkCore;
-using System.Linq.Expressions;
 
-namespace Charts.Api.Infrastructure.Repositories
+namespace Charts.Infrastructure.Repositories
 {
     public abstract class RepositoryBase<TEntity>(AppDbContext dbContext) where TEntity : class, IEntity
     {

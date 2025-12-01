@@ -1,4 +1,4 @@
-﻿namespace Charts.Api.Application.Interfaces.Repositories.CommonInterfaces
+﻿namespace Charts.Domain.Interfaces.Repositories.CommonInterfaces
 {
     public interface ISoftDeleteRepository<TEntity> where TEntity : class
     {

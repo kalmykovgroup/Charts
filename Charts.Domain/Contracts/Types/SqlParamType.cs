@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace Charts.Api.Domain.Contracts.Types
+namespace Charts.Domain.Contracts.Types
 {
     [JsonConverter(typeof(JsonStringEnumConverter))]
     public enum SqlParamType

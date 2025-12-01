@@ -1,9 +1,9 @@
-﻿using Charts.Api.Application.Contracts;
-using Charts.Api.Application.Interfaces;
-using Charts.Api.Domain.Contracts.Types;
-using System.Data.Common;
+﻿using System.Data.Common;
+using Charts.Domain.Contracts;
+using Charts.Domain.Contracts.Types;
+using Charts.Domain.Interfaces;
 
-namespace Charts.Api.Infrastructure.Databases
+namespace Charts.Infrastructure.Databases
 {
     public sealed class CurrentDb : ICurrentDb
     {

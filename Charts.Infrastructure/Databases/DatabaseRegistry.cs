@@ -1,13 +1,12 @@
-﻿using Charts.Api.Application.Contracts;
-using Charts.Api.Application.Interfaces;
-using Charts.Api.Domain.Contracts.Types;
+﻿using Charts.Domain.Contracts;
+using Charts.Domain.Contracts.Types;
+using Charts.Domain.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Npgsql;
-using System.Data.Common;
 
-namespace Charts.Api.Infrastructure.Databases;
+namespace Charts.Infrastructure.Databases;
 
 public sealed class DatabaseRegistry : IDatabaseRegistry
 {

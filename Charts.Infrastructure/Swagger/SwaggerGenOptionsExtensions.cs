@@ -1,7 +1,7 @@
-﻿using Swashbuckle.AspNetCore.SwaggerGen;
-using System.Reflection;
+﻿using System.Reflection;
+using Swashbuckle.AspNetCore.SwaggerGen;
 
-namespace Charts.Api.Swagger
+namespace Charts.Infrastructure.Swagger
 {
     public static class SwaggerGenOptionsExtensions
     {

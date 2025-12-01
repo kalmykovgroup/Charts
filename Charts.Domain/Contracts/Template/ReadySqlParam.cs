@@ -1,7 +1,6 @@
-﻿using Charts.Api.Application.Contracts.Metadata.Dtos;
-using Charts.Api.Domain.Contracts.Types;
+﻿using Charts.Domain.Contracts.Metadata.Dtos;
 
-namespace Charts.Api.Domain.Contracts.Template
+namespace Charts.Domain.Contracts.Template
 { 
     public sealed record ReadySqlParam(
     string Key,                      // имя плейсхолдера (например, {{key}})

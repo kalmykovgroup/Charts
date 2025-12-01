@@ -1,10 +1,11 @@
-﻿using Charts.Api.Application.Contracts.Charts.Dtos;
-using Charts.Api.Domain.Contracts.Template.Dtos;
-using Charts.Api.Application.Contracts.Metadata.Dtos;
-using Charts.Api.Domain.Contracts.Template;
-using System.Data.Common;
+﻿using System.Data.Common;
+using Charts.Domain.Contracts.Charts.Dtos;
+using Charts.Domain.Contracts.Metadata.Dtos;
+using Charts.Domain.Contracts.Template;
+using Charts.Domain.Contracts.Template.Dtos;
+using Npgsql;
 
-namespace Charts.Api.Infrastructure.Services;
+namespace Charts.Infrastructure.Services;
 public interface IChartQueryPlanner
 {
     Task<(bool Success, ChartQueryPlan? Plan)> BuildPlanAsync(
@@ -38,7 +39,7 @@ public interface ITimeColumnInspector
     Task<TimeColumnKind> GetKindAsync(DbConnection con, string entity, string timeField, CancellationToken ct);
 }
 
-public sealed record SqlRequest(string Sql, IReadOnlyList<Npgsql.NpgsqlParameter> Parameters);
+public sealed record SqlRequest(string Sql, IReadOnlyList<NpgsqlParameter> Parameters);
 
 public interface ISqlRequestFactory
 {

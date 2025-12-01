@@ -1,6 +1,6 @@
-﻿using Charts.Api.Application.Interfaces;
+﻿using Charts.Domain.Interfaces;
 
-namespace Charts.Api.Infrastructure.Databases
+namespace Charts.Infrastructure.Databases
 {
     public class UnitOfWork : IUnitOfWork
     {

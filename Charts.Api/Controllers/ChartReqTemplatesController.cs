@@ -1,8 +1,7 @@
-﻿using Charts.Api.Application.Contracts.Template.Requests;
-using Charts.Api.Application.QueryAndCommands.Template;
+﻿using Charts.Application.QueryAndCommands.Template;
+using Charts.Domain.Contracts.Template.Requests;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using System.Text.Json;
 
 namespace Charts.Api.Controllers;
 

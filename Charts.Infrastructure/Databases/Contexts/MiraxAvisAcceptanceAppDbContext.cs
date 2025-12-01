@@ -1,5 +1,4 @@
-﻿using Mirax.AvisAcceptanceApp.Share.CopyModels;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Mirax.AvisAcceptanceApp.Models.Entity;
 using Mirax.AvisAcceptanceApp.Models.Entity.Configuration;
@@ -7,8 +6,9 @@ using Mirax.AvisAcceptanceApp.Models.Entity.ModBusDevice;
 using Mirax.AvisAcceptanceApp.Models.Entity.ModBusDevice.PortableDeviceModel;
 using Mirax.AvisAcceptanceApp.Service.TechTest.Models;
 using Mirax.AvisAcceptanceApp.Service.TemperatureAnalysis.Models;
+using Mirax.AvisAcceptanceApp.Share.CopyModels;
 
-namespace Charts.Api.Infrastructure.Databases.Contexts
+namespace Charts.Infrastructure.Databases.Contexts
 {
     public class MiraxAvisAcceptanceAppDbContext : DbContext
     {

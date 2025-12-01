@@ -1,9 +1,7 @@
-﻿
+﻿using System.Data.Common;
+using Charts.Domain.Contracts.Types;
 
-using Charts.Api.Domain.Contracts.Types;
-using System.Data.Common;
-
-namespace Charts.Api.Application.Contracts
+namespace Charts.Domain.Contracts
 {
     public sealed record RegisteredDatabase
     {
