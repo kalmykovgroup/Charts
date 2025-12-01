@@ -30,7 +30,7 @@ public class MetadataController(IMediator mediator) : ControllerBase
     public async Task<IActionResult> UpdateDatabase([FromRoute] Guid id, [FromBody] UpdateDatabaseRequest body, CancellationToken ct)
     {
         if (body.Id == Guid.Empty || body.Id != id)
-            return BadRequest(new { message = "Body.id должен совпадать с маршрутом /database/update/{id}." });
+            return BadRequest(new { message = "Body.id должен совпадать с маршрутом /databases/update/{id}." });
 
         var updated = await mediator.Send(new UpdateDatabaseCommand(id, body), ct);
         return Ok(updated);
@@ -67,8 +67,3 @@ public class MetadataController(IMediator mediator) : ControllerBase
     }
 }
 
-public class TestConnectionRequest
-{
-    public string ConnectionString { get; set; } = string.Empty;
-    public string Provider { get; set; } = "PostgreSql";
-}

@@ -25,7 +25,7 @@ namespace Charts.Infrastructure.Databases.Seeder
                         DatabaseVersion = "",
                         Description = "PostgreSQLConnectionLocal",
                         ConnectionString = "Host=localhost;Port=5432;Username=postgres;Password=koval007;Database=test; Include Error Detail=true;Pooling=false;Timeout=300;CommandTimeout=300",
-                        DatabaseStatus = DatabaseStatus.Active,
+                        Status = EntityStatus.Active,
                     },
                     new Database()
                     {
@@ -33,7 +33,7 @@ namespace Charts.Infrastructure.Databases.Seeder
                         Name = "mirax",
                         DatabaseVersion = "",
                         ConnectionString = "Host=127.0.0.1;Port=5454;Database=mirax;Username=postgres;Password=postgres;Pooling=true;Timeout=5;KeepAlive=30;Ssl Mode=Disable",
-                        DatabaseStatus = DatabaseStatus.Active,
+                        Status = EntityStatus.Active,
                     },
                     new Database()
                     {
@@ -41,7 +41,7 @@ namespace Charts.Infrastructure.Databases.Seeder
                         Name = "scenarios",
                         DatabaseVersion = "",
                         ConnectionString = "Host=localhost;Port=5432;Database=mirax;Username=postgres;Password=postgres;",
-                        DatabaseStatus = DatabaseStatus.Active,
+                        Status = EntityStatus.Active,
                     }
                 ]);
             await dbContext.SaveChangesAsync();

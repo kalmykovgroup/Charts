@@ -4,7 +4,11 @@
       "Bash(where:*)",
       "Bash(dotnet --list-sdks:*)",
       "Bash(dotnet --list-runtimes:*)",
-      "Bash(\"C:\\Program Files\\dotnet\\dotnet.exe\" --list-runtimes)"
+      "Bash(\"C:\\Program Files\\dotnet\\dotnet.exe\" --list-runtimes)",
+      "Bash(dotnet build:*)",
+      "Bash(dotnet ef migrations add:*)",
+      "Bash(del \"C:\\Users\\vanya\\RiderProjects\\Charts\\Charts.Domain\\Interfaces\\IErrorMessageProvider.cs\")",
+      "Bash(git add:*)"
     ],
     "deny": [],
     "ask": []

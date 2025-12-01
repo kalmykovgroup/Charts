@@ -32,7 +32,7 @@ namespace Charts.Application.Handlers.Metadata.Databases
                 await tx.CommitAsync(ct);
 
                 // Регистрируем в реестре если база активна
-                if (entity.DatabaseStatus == DatabaseStatus.Active)
+                if (entity.Status == EntityStatus.Active)
                 {
                     await registry.RegisterAsync(entity.Id, ct);
                 }

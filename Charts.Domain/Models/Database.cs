@@ -11,9 +11,7 @@ namespace Charts.Domain.Models
         public string ConnectionString { get; set; } = string.Empty;
         public string? Description { get; set; } = null;
 
-
         public DbProviderType Provider { get; set; } = DbProviderType.PostgreSql;
-        public DatabaseStatus DatabaseStatus {  get; set; }
         public DatabaseAvailability Availability { get; set; } = DatabaseAvailability.Unknown;
         public DateTimeOffset? LastConnectivityAt { get; set; }
         public string? LastConnectivityError { get; set; }

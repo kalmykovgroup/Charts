@@ -33,7 +33,7 @@ public sealed class DatabaseRegistry : IDatabaseRegistry
         var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
 
         var rows = await db.Databases
-            .Where(d => d.DatabaseStatus == DatabaseStatus.Active && !d.IsDeleted)
+            .Where(d => d.Status == EntityStatus.Active && !d.IsDeleted)
             .Select(d => new
             {
                 d.Id,
@@ -72,7 +72,7 @@ public sealed class DatabaseRegistry : IDatabaseRegistry
         var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
 
         var entity = await db.Databases
-            .Where(d => d.Id == id && d.DatabaseStatus == DatabaseStatus.Active && !d.IsDeleted)
+            .Where(d => d.Id == id && d.Status == EntityStatus.Active && !d.IsDeleted)
             .Select(d => new
             {
                 d.Id,
@@ -179,7 +179,7 @@ public sealed class DatabaseRegistry : IDatabaseRegistry
         var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
 
         var entity = await dbContext.Databases
-            .Where(d => d.Name == name && d.DatabaseStatus == DatabaseStatus.Active && !d.IsDeleted)
+            .Where(d => d.Name == name && d.Status == EntityStatus.Active && !d.IsDeleted)
             .Select(d => new { d.Id })
             .FirstOrDefaultAsync(ct);
 
@@ -229,6 +229,7 @@ public sealed class DatabaseRegistry : IDatabaseRegistry
                         csb.Host = "127.0.0.1";
                     csb.Encoding = "UTF8";
                     csb.ClientEncoding = "UTF8";
+                    csb.Options = "-c lc_messages=en_US.UTF-8";
                     csb.Timeout = 10;
 
                     var dsb = new NpgsqlDataSourceBuilder(csb.ConnectionString);
@@ -251,36 +252,12 @@ public sealed class DatabaseRegistry : IDatabaseRegistry
                     return new ConnectionTestResult(false, null, $"Unknown provider: {provider}", sw.ElapsedMilliseconds);
             }
         }
-        catch (PostgresException pgEx)
-        {
-            sw.Stop();
-            _log.LogWarning(pgEx, "Connection test failed");
-            // Используем SqlState код вместо сломанного текста
-            var errorMessage = GetPostgresErrorMessage(pgEx.SqlState);
-            return new ConnectionTestResult(false, null, errorMessage, sw.ElapsedMilliseconds);
-        }
         catch (Exception ex)
         {
             sw.Stop();
             _log.LogWarning(ex, "Connection test failed");
-            return new ConnectionTestResult(false, null, ex.Message, sw.ElapsedMilliseconds);
+            return new ConnectionTestResult(false, null, Helpers.PostgresErrorHelper.GetMessage(ex), sw.ElapsedMilliseconds);
         }
-    }
-
-    private static string GetPostgresErrorMessage(string? sqlState)
-    {
-        return sqlState switch
-        {
-            "28P01" => "Authentication failed: invalid password",
-            "28000" => "Authentication failed: invalid authorization",
-            "3D000" => "Database does not exist",
-            "42501" => "Permission denied",
-            "08001" => "Unable to establish connection",
-            "08006" => "Connection failure",
-            "57P03" => "Server is starting up",
-            "53300" => "Too many connections",
-            _ => $"PostgreSQL error: {sqlState}"
-        };
     }
 
     private RegisteredDatabase? CreateRegisteredDatabase(Guid id, string name, string? version, string connectionString, DbProviderType provider)
@@ -296,6 +273,7 @@ public sealed class DatabaseRegistry : IDatabaseRegistry
                         csb.Host = "127.0.0.1";
                     csb.Encoding = "UTF8";
                     csb.ClientEncoding = "UTF8";
+                    csb.Options = "-c lc_messages=en_US.UTF-8";
 
                     var dsb = new NpgsqlDataSourceBuilder(csb.ConnectionString);
                     var ds = dsb.Build();

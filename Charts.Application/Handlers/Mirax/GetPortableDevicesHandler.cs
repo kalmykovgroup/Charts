@@ -23,23 +23,14 @@ namespace Charts.Application.Handlers.Mirax
             GetPortableDevicesQuery query,
             CancellationToken ct)
         {
-            try
-            {
-                await using var con = await _db.OpenConnectionAsync(ct);
-
-                var items = await _repository.GetPortableDevicesAsync(
-                    con,
-                    _db.Provider,
-                    query.TechnicalRunId,
-                    ct
-                );
-
-                return ApiResponse<List<PortableDeviceDto>>.Ok(items);
-            }
-            catch (Exception ex)
-            {
-                return ApiResponse<List<PortableDeviceDto>>.Fail(ex.Message, ex);
-            }
+            await using var con = await _db.OpenConnectionAsync(ct);
+            var items = await _repository.GetPortableDevicesAsync(
+                con,
+                _db.Provider,
+                query.TechnicalRunId,
+                ct
+            );
+            return ApiResponse<List<PortableDeviceDto>>.Ok(items);
         }
     }
 }

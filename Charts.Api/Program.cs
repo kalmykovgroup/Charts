@@ -100,7 +100,11 @@ namespace Charts.Api
 
             var dsb = new NpgsqlDataSourceBuilder(csbDefault.ConnectionString);
             dsb.UseLoggerFactory(loggerFactory);
-            dsb.EnableDynamicJson(); // если используешь jsonb c динамическим JSON
+            dsb.EnableDynamicJson();
+
+            // Устанавливаем английский язык для сообщений об ошибках PostgreSQL
+            dsb.ConnectionStringBuilder.Options = "-c lc_messages=en_US.UTF-8";
+
             var defaultDataSource = dsb.Build();
             builder.Services.AddSingleton(defaultDataSource);
 
@@ -224,17 +228,16 @@ namespace Charts.Api
                 errApp.Run(async context =>
                 {
                     var feature = context.Features.Get<IExceptionHandlerPathFeature>();
+
                     context.Response.StatusCode = StatusCodes.Status500InternalServerError;
                     context.Response.ContentType = "application/json";
 
-                    var payload = new
-                    {
-                        message = feature?.Error?.Message,
-#if DEBUG
-                        details = feature?.Error?.ToString()
-#endif
-                    };
-                    await context.Response.WriteAsJsonAsync(payload);
+                    var errorMessage = feature?.Error != null
+                        ? Charts.Infrastructure.Helpers.PostgresErrorHelper.GetMessage(feature.Error)
+                        : "Unknown error";
+
+                    var response = ApiResponse<object>.Fail(errorMessage, feature?.Error);
+                    await context.Response.WriteAsJsonAsync(response);
                 });
             });
 

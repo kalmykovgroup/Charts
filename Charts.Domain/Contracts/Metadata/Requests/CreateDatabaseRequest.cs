@@ -10,6 +10,6 @@ namespace Charts.Domain.Contracts.Metadata.Requests
         public string ConnectionString { get; set; } = string.Empty;
 
         public DbProviderType Provider { get; set; } = DbProviderType.PostgreSql;
-        public DatabaseStatus DatabaseStatus { get; set; }  
+        public EntityStatus Status { get; set; } = EntityStatus.Active;
     }
 }

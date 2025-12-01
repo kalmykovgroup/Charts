@@ -10,18 +10,9 @@ namespace Charts.Application.Handlers.Charts
     {
         public async Task<ApiResponse<MultiSeriesResponse>> Handle(GetMultiSeriesQuery req, CancellationToken ct)
         {
-            try
-            {
-                await using var con = await db.OpenConnectionAsync(ct); 
-
-                var dto = await charts.GetMultiSeriesAsync(con, req.Request, ct);
-                 
-                return ApiResponse<MultiSeriesResponse>.Ok(dto);
-            }
-            catch (Exception ex)
-            {
-                return ApiResponse<MultiSeriesResponse>.Fail(ex.Message, ex);
-            }           
+            await using var con = await db.OpenConnectionAsync(ct);
+            var dto = await charts.GetMultiSeriesAsync(con, req.Request, ct);
+            return ApiResponse<MultiSeriesResponse>.Ok(dto);
         } 
     }
 }

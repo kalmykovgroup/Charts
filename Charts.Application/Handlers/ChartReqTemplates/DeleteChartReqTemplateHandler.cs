@@ -17,20 +17,18 @@ namespace Charts.Application.Handlers.ChartReqTemplates
         {
             await using var tx = await uow.BeginTransactionAsync(ct);
             try
-            { 
+            {
                 await repo.DeleteAsync(command.Id, ct);
                 await uow.SaveChangesAsync(ct);
-                await tx.CommitAsync(ct); 
+                await tx.CommitAsync(ct);
+                return ApiResponse<bool>.Ok(true);
             }
             catch (Exception ex)
             {
                 logger.LogError(ex, "Error while deleting ChartReqTemplate Id={Id}", command.Id);
                 await tx.RollbackAsync(ct);
-                return ApiResponse<bool>.Fail(ex.Message, ex);
+                throw;
             }
-
-
-            return ApiResponse<bool>.Ok(true); // контроллер вернёт { ok: true }
         }
     }
 }

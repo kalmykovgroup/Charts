@@ -19,20 +19,17 @@ namespace Charts.Application.Handlers.Metadata.Databases
             await using var tx = await uow.BeginTransactionAsync(ct);
             try
             {
-                // Сначала удаляем из реестра
                 await registry.UnregisterAsync(command.Id, ct);
-
                 await repo.DeleteAsync(command.Id, ct);
                 await uow.SaveChangesAsync(ct);
                 await tx.CommitAsync(ct);
-
                 return ApiResponse<bool>.Ok(true);
             }
             catch (Exception ex)
             {
                 logger.LogError(ex, "Error while deleting Database Id={Id}", command.Id);
                 await tx.RollbackAsync(ct);
-                return ApiResponse<bool>.Fail(ex.Message, ex);
+                throw;
             }
         }
     }

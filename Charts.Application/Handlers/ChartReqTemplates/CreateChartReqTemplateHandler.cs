@@ -25,24 +25,19 @@ namespace Charts.Application.Handlers.ChartReqTemplates
             try
             {
                 entity = mapper.Map<ChartReqTemplate>(command.Request);
-
-                // BUGFIX: раньше было entity.Id = command.Request.Id != null ? entity.Id : Guid.CreateVersion7();
                 entity.Id = command.Request.Id ?? Guid.CreateVersion7();
 
                 await repo.AddAsync(entity, ct);
                 await uow.SaveChangesAsync(ct);
-
-                await tx.CommitAsync(ct);           // <-- только DB-операции внутри try
+                await tx.CommitAsync(ct);
             }
             catch (Exception ex)
             {
-                // Откатываем ТОЛЬКО если коммита не было
                 try { await tx.RollbackAsync(ct); } catch { /* ignore */ }
                 logger.LogError(ex, "Error while creating ChartReqTemplate");
-                return ApiResponse<ChartReqTemplateDto>.Fail(ex.Message, ex);
+                throw;
             }
 
-            // Всё, что может упасть, делаем уже вне зоны rollback
             var dto = mapper.Map<ChartReqTemplateDto>(entity);
             return ApiResponse<ChartReqTemplateDto>.Ok(dto);
         }

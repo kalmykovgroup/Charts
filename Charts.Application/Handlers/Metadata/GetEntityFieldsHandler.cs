@@ -10,20 +10,9 @@ namespace Charts.Application.Handlers.Metadata
     {
         public async Task<ApiResponse<IReadOnlyList<FieldDto>>> Handle(GetEntityFieldsQuery req, CancellationToken ct)
         {
-
-            try
-            {
-                await using var con = await db.OpenConnectionAsync(ct);
-
-                var (_, _, _, fields) = await meta.GetEntityFieldsAsync( con, db.Provider, req.Entity, ct);
-
-                return ApiResponse < IReadOnlyList < FieldDto >>.Ok(fields);
-            }
-            catch (Exception ex)
-            {
-                return ApiResponse<IReadOnlyList<FieldDto>>.Fail(ex.Message, ex);
-            }
-            
+            await using var con = await db.OpenConnectionAsync(ct);
+            var (_, _, _, fields) = await meta.GetEntityFieldsAsync(con, db.Provider, req.Entity, ct);
+            return ApiResponse<IReadOnlyList<FieldDto>>.Ok(fields);
         }
     }
 }

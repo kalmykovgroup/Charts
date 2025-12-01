@@ -30,7 +30,7 @@ namespace Charts.Application.Handlers.Metadata.Databases
                     throw new KeyNotFoundException($"Database {command.Id} not found");
                 }
 
-                var wasActive = entity.DatabaseStatus == DatabaseStatus.Active;
+                var wasActive = entity.Status == EntityStatus.Active;
 
                 mapper.Map(command.Request, entity);
                 await repo.UpdateAsync(entity, ct);
@@ -38,7 +38,7 @@ namespace Charts.Application.Handlers.Metadata.Databases
                 await tx.CommitAsync(ct);
 
                 // Перерегистрируем в реестре
-                if (entity.DatabaseStatus == DatabaseStatus.Active)
+                if (entity.Status == EntityStatus.Active)
                 {
                     // Удаляем старую регистрацию и добавляем новую (connection string мог измениться)
                     await registry.UnregisterAsync(entity.Id, ct);

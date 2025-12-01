@@ -14,17 +14,9 @@ namespace Charts.Application.Handlers.ChartReqTemplates
     {
         public async Task<ApiResponse<List<ChartReqTemplateDto>>> Handle(GetAllChartReqTemplatesQuery request, CancellationToken ct)
         {
-            try
-            {
-                var items = await repo.GetAllAsync(ct);
-                var dtos = mapper.Map<List<ChartReqTemplateDto>>(items);
-
-                return ApiResponse<List<ChartReqTemplateDto>>.Ok(dtos);
-            }
-            catch (Exception ex) {
-                return ApiResponse<List<ChartReqTemplateDto>>.Fail(ex.Message, ex);
-            }
-            
+            var items = await repo.GetAllAsync(ct);
+            var dtos = mapper.Map<List<ChartReqTemplateDto>>(items);
+            return ApiResponse<List<ChartReqTemplateDto>>.Ok(dtos);
         }
     }
 

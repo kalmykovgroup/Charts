@@ -24,24 +24,15 @@ namespace Charts.Application.Handlers.Mirax
             GetSensorsQuery query,
             CancellationToken ct)
         {
-            try
-            {
-                await using var con = await _db.OpenConnectionAsync(ct);
-
-                var items = await _repository.GetSensorsAsync(
-                    con,
-                    _db.Provider,
-                    query.TechnicalRunId,
-                    query.FactoryNumber,
-                    ct
-                );
-
-                return ApiResponse<List<SensorDto>>.Ok(items);
-            }
-            catch (Exception ex)
-            {
-                return ApiResponse<List<SensorDto>>.Fail(ex.Message, ex);
-            }
+            await using var con = await _db.OpenConnectionAsync(ct);
+            var items = await _repository.GetSensorsAsync(
+                con,
+                _db.Provider,
+                query.TechnicalRunId,
+                query.FactoryNumber,
+                ct
+            );
+            return ApiResponse<List<SensorDto>>.Ok(items);
         }
     }
 }

@@ -32,7 +32,7 @@ namespace Charts.Infrastructure.Databases.Configurations
             e.HasKey(x => x.Id);
             e.Property(x => x.Name).HasMaxLength(128).IsRequired();
             e.Property(x => x.ConnectionString).IsRequired();
-            e.Property(x => x.DatabaseStatus).HasConversion<int>().IsRequired();
+            e.Property(x => x.Status).HasConversion<int>().IsRequired();
             e.HasIndex(x => x.Name).IsUnique();
 
             e.Property(x => x.Entities)

@@ -24,18 +24,9 @@ namespace Charts.Application.Handlers.Mirax
             GetTechnicalRunsQuery query,
             CancellationToken ct)
         {
-            try
-            {
-                await using var con = await _db.OpenConnectionAsync(ct);
-
-                var items = await _repository.GetTechnicalRunsAsync(con, _db.Provider, query.FactoryNumber, ct);
-
-                return ApiResponse<List<TechnicalRunToStartDto>>.Ok(items);
-            }
-            catch (Exception ex)
-            {
-                return ApiResponse<List<TechnicalRunToStartDto>>.Fail(ex.Message, ex);
-            }
+            await using var con = await _db.OpenConnectionAsync(ct);
+            var items = await _repository.GetTechnicalRunsAsync(con, _db.Provider, query.FactoryNumber, ct);
+            return ApiResponse<List<TechnicalRunToStartDto>>.Ok(items);
         }
     }
 }
