@@ -8,7 +8,9 @@
       "Bash(dotnet build:*)",
       "Bash(dotnet ef migrations add:*)",
       "Bash(del \"C:\\Users\\vanya\\RiderProjects\\Charts\\Charts.Domain\\Interfaces\\IErrorMessageProvider.cs\")",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)"
     ],
     "deny": [],
     "ask": []

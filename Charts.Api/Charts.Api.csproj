@@ -43,4 +43,24 @@
     <ProjectReference Include="..\Charts.Infrastructure\Charts.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="wwwroot\assets\charts.CPsdNx2m.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\assets\charts.CPsdNx2m.js.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\assets\files.BtghHq-e.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\assets\files.BtghHq-e.js.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\assets\index.CPGHcSm1.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\assets\index.QUdSxbQ9.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\assets\index.QUdSxbQ9.js.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\assets\react-core.Gmj5k1uE.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\assets\react-core.Gmj5k1uE.js.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\assets\react-router.CxqFhiv8.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\assets\react-router.CxqFhiv8.js.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\assets\redux-core.10CGpUcv.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\assets\redux-core.10CGpUcv.js.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\assets\ui-libs.Dj0IXxHc.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\assets\ui-libs.Dj0IXxHc.js.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\assets\utils.QI2dN_KI.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\assets\utils.QI2dN_KI.js.map" />
+  </ItemGroup>
+
 </Project>
